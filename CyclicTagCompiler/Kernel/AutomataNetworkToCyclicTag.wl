@@ -91,7 +91,7 @@ CompiledAutomataNetworkToCyclicTag[
 		With[{ctRule = AutomataNetworkToCyclicTagRule[gates, states, compilerOptions]},
 			Function[{init, t},
 				DecodeCyclicTagToAutomataNetwork[
-					resourceFunction["CyclicTagSystemEvolveList"][
+					CyclicTagSystem[
 						ctRule,
 						AutomataNetworkToCyclicTagInit[init, gates, states, compilerOptions],
 						AutomataNetworkToCyclicTagSteps[t, gates, states, compilerOptions]],

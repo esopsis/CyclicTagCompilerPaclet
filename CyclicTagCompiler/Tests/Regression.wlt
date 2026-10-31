@@ -66,13 +66,13 @@ VerificationTest[
 ]
 
 VerificationTest[
-	DecodeCyclicTagToNaryCyclicTag[ResourceFunction["CyclicTagSystemEvolveList"][NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}], NaryCyclicTagToCyclicTagInit[{2, 0, 1}, 3], NaryCyclicTagToCyclicTagSteps[6, 3]], 3],
+	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}], NaryCyclicTagToCyclicTagInit[{2, 0, 1}, 3], NaryCyclicTagToCyclicTagSteps[6, 3]], 3],
 	{{2, 0, 1}, {0, 1}, {1, 1, 1}, {1, 1, 0, 1}, {1, 0, 1, 2}, {0, 1, 2, 0, 1}, {1, 2, 0, 1, 1, 1}},
 	TestID -> "Regression-NCT-Decode-1"
 ]
 
 VerificationTest[
-	DecodeCyclicTagToNaryCyclicTag[ResourceFunction["CyclicTagSystemEvolveList"][NaryCyclicTagToCyclicTagRule[{{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagInit[{0, 1}, 2, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagSteps[5, 2, "TargetSystem" -> "Rule110"]], 2, "TargetSystem" -> "Rule110"],
+	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagInit[{0, 1}, 2, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagSteps[5, 2, "TargetSystem" -> "Rule110"]], 2, "TargetSystem" -> "Rule110"],
 	{{0, 1}, {1, 1}, {1, 1, 1}, {1, 1, 0, 0}, {1, 0, 0, 1, 1}, {0, 0, 1, 1, 0, 0}},
 	TestID -> "Regression-NCT-Decode-2"
 ]
@@ -162,7 +162,7 @@ VerificationTest[
 ]
 
 VerificationTest[
-	DecodeCyclicTagToObliviousRingMachine[ResourceFunction["CyclicTagSystemEvolveList"][ObliviousRingMachineToCyclicTagRule[{{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5], ObliviousRingMachineToCyclicTagInit[{0, 1, 1, 0, 1}, {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}], ObliviousRingMachineToCyclicTagSteps[4, {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5]], {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5],
+	DecodeCyclicTagToObliviousRingMachine[CyclicTagSystem[ObliviousRingMachineToCyclicTagRule[{{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5], ObliviousRingMachineToCyclicTagInit[{0, 1, 1, 0, 1}, {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}], ObliviousRingMachineToCyclicTagSteps[4, {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5]], {{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5],
 	{{0, 1, 1, 0, 1}, {1, 0, 1, 1, 0}, {1, 1, 0, 1, 0}, {0, 1, 0, 0, 0}, {0, 0, 0, 1, 0}},
 	TestID -> "Regression-ORM-Decode-1"
 ]

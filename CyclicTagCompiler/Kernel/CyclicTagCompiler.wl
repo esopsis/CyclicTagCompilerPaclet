@@ -17,11 +17,9 @@ BeginPackage["EricJamesParfitt`CyclicTagCompiler`"];
 
 
 CyclicTagSystem::usage =
-"CyclicTagSystem[rules, init, t] returns the list of states attained from evolving init, using cyclic tag system rules over t steps.
-CyclicTagSystem[rules, init] gives the result of evolving init for one step.
-CyclicTagSystem[rules, init, t, dt] returns the states attained at every step dt.
-CyclicTagSystem[rules, init, t, dt, prop] returns the specified prop of states attained at every step.
-CyclicTagSystem[rules] is an operator form of CyclicTagSystem that represents one step of evolution.";
+"CyclicTagSystem[rules, init, t] gives the list of tapes in t steps of the cyclic tag system with the blocks rules, starting from the tape init.
+CyclicTagSystem[rules, init, t, prop] gives the property prop at each step, where prop is \"States\" or \"Rules\".
+CyclicTagSystem[rules, init, t, {prop1, prop2, \[Ellipsis]}] gives a list {prop1, prop2, \[Ellipsis]} of properties at each step.";
 
 NaryCyclicTag::usage =
 "NaryCyclicTag[{rule1, rule2, \[Ellipsis]}, init, t] gives a list of the tapes in t steps of the n-ary cyclic tag system that uses the rules rulei in turn, starting from the tape init.";

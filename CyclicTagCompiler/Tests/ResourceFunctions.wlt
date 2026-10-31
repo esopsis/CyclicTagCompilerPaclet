@@ -10,7 +10,7 @@ resourceFunction = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction;
 
 (* The functions the paclet calls, and the reference systems the tests and documentation use. *)
 $usedResourceFunctions = {
-	"ArraySkew", "CellularAutomatonFromNumber", "CyclicPartition", "CyclicTagSystemEvolveList",
+	"ArraySkew", "CellularAutomatonFromNumber", "CyclicPartition",
 	"PadRightToMinLength", "RaggedTranspose", "ReplaceByOccurrence"};
 $referenceResourceFunctions = {"AutomataNetworkRun", "NaryCyclicTag", "ObliviousRingMachine"};
 
@@ -86,22 +86,10 @@ VerificationTest[
 	TestID -> "ResourceFunctions-CellularAutomatonFromNumber"
 ]
 
+(* Apart from CyclicTagSystem, the systems are the resource functions themselves. *)
 VerificationTest[
-	resourceFunction["CyclicTagSystemEvolveList"][{{1, 1}, {0}}, {1}, 3],
-	{{1}, {1, 1}, {1, 0}, {0, 1, 1}},
-	TestID -> "ResourceFunctions-CyclicTagSystemEvolveList"
-]
-
-VerificationTest[
-	resourceFunction["CyclicTagSystemEvolveList"][{{1, 1}, {1, 0}}, {1}, 3, "IncludeRules" -> True],
-	{{{1}, {1, 1}}, {{1, 1}, {1, 0}}, {{1, 1, 0}, {1, 1}}, {{1, 0, 1, 1}, {1, 0}}},
-	TestID -> "ResourceFunctions-CyclicTagSystemEvolveList-IncludeRules"
-]
-
-(* The systems are the resource functions themselves. *)
-VerificationTest[
-	{CyclicTagSystem, NaryCyclicTag, ObliviousRingMachine, AutomataNetworkRun} ===
-		(resourceFunction /@ {"CyclicTagSystemEvolveList", "NaryCyclicTag", "ObliviousRingMachine", "AutomataNetworkRun"}),
+	{NaryCyclicTag, ObliviousRingMachine, AutomataNetworkRun} ===
+		(resourceFunction /@ {"NaryCyclicTag", "ObliviousRingMachine", "AutomataNetworkRun"}),
 	True,
 	TestID -> "ResourceFunctions-Systems"
 ]

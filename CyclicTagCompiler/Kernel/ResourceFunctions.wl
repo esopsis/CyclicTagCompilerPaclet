@@ -19,10 +19,9 @@ Begin["`Private`"];
 $deployedResourceFunctionBase = "https://www.wolframcloud.com/obj/ericp/DeployedResources/Function/";
 
 
-(* These deployed copies are newer than the published versions, so they are tried first:
-   the published CellularAutomatonFromNumber (version 1.0.0) does not handle half-integer ranges,
-   and the published CyclicTagSystemEvolveList (version 1.1.0) does not have the "IncludeRules" option. *)
-$deployedFirst = {"CellularAutomatonFromNumber", "CyclicTagSystemEvolveList"};
+(* The published CellularAutomatonFromNumber (version 1.0.0) does not handle half-integer ranges,
+   so the deployed copy, which does, is tried first. *)
+$deployedFirst = {"CellularAutomatonFromNumber"};
 
 
 $resourceFunctionCache = <||>;
