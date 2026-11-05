@@ -17,7 +17,7 @@ cTStep[{0, a___}, _List] := {a}
 
 cTStep[{1, a___}, {rs___}] := {a, rs}
 
-cTStep[{}, _] := {}
+cTStep[{}, _] = {};
 
 
 CyclicTagSystem[rule : {___List}, init_List, t_Integer?NonNegative, property : "States" | "Rules" : "States"] :=
