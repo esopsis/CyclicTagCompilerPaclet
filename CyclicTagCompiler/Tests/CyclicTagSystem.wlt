@@ -49,6 +49,20 @@ VerificationTest[
 	TestID -> "CyclicTagSystem-NoBlocksRules"
 ]
 
+(* With no blocks, a tape that is not empty cannot be evolved, and the result shows that. *)
+VerificationTest[
+	{CyclicTagSystem[{}, {}, 2], FreeQ[CyclicTagSystem[{}, {0, 1}, 2], EricJamesParfitt`CyclicTagCompiler`Private`cTStep]},
+	{{{}, {}, {}}, False},
+	TestID -> "CyclicTagSystem-NoBlocks"
+]
+
+(* Memory does not grow with the number of blocks times the number of steps. *)
+VerificationTest[
+	MaxMemoryUsed[CyclicTagSystem[ConstantArray[{1}, 4000], ConstantArray[1, 20], 4000]] < 2*^7,
+	True,
+	TestID -> "CyclicTagSystem-Memory"
+]
+
 (* The tapes are the same as those of the Wolfram Function Repository function CyclicTagSystemEvolveList. *)
 VerificationTest[
 	With[{ctsel = ResourceFunction["CyclicTagSystemEvolveList"]},

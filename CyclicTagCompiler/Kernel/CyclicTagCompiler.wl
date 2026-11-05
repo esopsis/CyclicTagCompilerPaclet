@@ -195,6 +195,7 @@ Scan[
 	Get,
 	{
 		"EricJamesParfitt`CyclicTagCompiler`ResourceFunctions`",
+		"EricJamesParfitt`CyclicTagCompiler`CyclicTagSystem`",
 		"EricJamesParfitt`CyclicTagCompiler`Systems`",
 		"EricJamesParfitt`CyclicTagCompiler`ObliviousRingMachineRules`",
 		"EricJamesParfitt`CyclicTagCompiler`Utilities`",
