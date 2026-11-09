@@ -6,15 +6,15 @@ VerificationTest[
 	TestID -> "ObliviousRingMachine-Load"
 ]
 
-(* The reference systems are resource functions. The paclet's resolver also finds those
-   that are not yet in the Wolfram Function Repository. *)
-ctEvolve = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["CyclicTagSystemEvolveList"];
+(* Cyclic tag systems are run with the paclet's own CyclicTagSystem. The other reference systems are resource
+   functions; the paclet's resolver also finds those that are not yet in the Wolfram Function Repository. *)
+ctEvolve = CyclicTagSystem;
 nctEvolve = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["NaryCyclicTag"];
 ormEvolve = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["ObliviousRingMachine"];
 
 (* If a reference system could not be loaded, for example without a network connection, the other tests fail. *)
 VerificationTest[
-	MatchQ[{ctEvolve, nctEvolve, ormEvolve}, {__ResourceFunction}],
+	MatchQ[{nctEvolve, ormEvolve}, {__ResourceFunction}],
 	True,
 	TestID -> "ObliviousRingMachine-ReferenceSystems"
 ]

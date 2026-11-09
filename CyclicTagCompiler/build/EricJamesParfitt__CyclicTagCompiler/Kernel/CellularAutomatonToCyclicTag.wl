@@ -118,7 +118,7 @@ CompiledCellularAutomatonToCyclicTag[
 				ctRule = CellularAutomatonToCyclicTagRule[expandedRule, tapeLength, tapeStates, compilerOptions]},
 			Function[{init, steps},
 				DecodeCyclicTagToCellularAutomaton[
-					resourceFunction["CyclicTagSystemEvolveList"][
+					CyclicTagSystem[
 						ctRule,
 						CellularAutomatonToCyclicTagInit[init, states, r, compilerOptions],
 						CellularAutomatonToCyclicTagSteps[steps, tapeLength, states, r, compilerOptions]],

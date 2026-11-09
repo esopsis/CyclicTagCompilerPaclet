@@ -6,14 +6,14 @@ VerificationTest[
 	TestID -> "CellularAutomaton-Load"
 ]
 
-(* The reference systems are resource functions. The paclet's resolver also finds those
-   that are not yet in the Wolfram Function Repository. *)
-ctEvolve = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["CyclicTagSystemEvolveList"];
+(* Cyclic tag systems are run with the paclet's own CyclicTagSystem. The other reference systems are resource
+   functions; the paclet's resolver also finds those that are not yet in the Wolfram Function Repository. *)
+ctEvolve = CyclicTagSystem;
 ormEvolve = EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["ObliviousRingMachine"];
 
 (* If a reference system could not be loaded, for example without a network connection, the other tests fail. *)
 VerificationTest[
-	MatchQ[{ctEvolve, ormEvolve}, {__ResourceFunction}],
+	MatchQ[{ormEvolve}, {__ResourceFunction}],
 	True,
 	TestID -> "CellularAutomaton-ReferenceSystems"
 ]
@@ -204,7 +204,7 @@ VerificationTest[
 	{
 		CellularAutomatonToCyclicTagInit[{0, 2, 1, 0}] === CellularAutomatonToCyclicTagInit[{0, 2, 1, 0}, 3],
 		DecodeCyclicTagToCellularAutomaton[
-			EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction["CyclicTagSystemEvolveList"][
+			CyclicTagSystem[
 				CellularAutomatonToCyclicTagRule[{2007, 3, 1}, 7, "InfiniteSteps" -> True],
 				CellularAutomatonToCyclicTagInit[{0, 2, 1, 0, 1, 2, 0}, 2, 1, "InfiniteSteps" -> True],
 				CellularAutomatonToCyclicTagSteps[4, 7, 3, 1, "InfiniteSteps" -> True]],

@@ -108,13 +108,13 @@ stepReplacementSize[{}] = 1;
 stepReplacementSize[rule_List] := Length[First[Keys[rule]]]
 
 
-ormSkipSelector[states_Integer] :=
+skipSelector[states_Integer] :=
 	List /@ Range[0, states - 1]
 
 
-ormSkips[states_Integer, replacementSize_Integer, tapeLength_Integer, extraSkips_Integer] :=
+skips[states_Integer, replacementSize_Integer, tapeLength_Integer, extraSkips_Integer:0] :=
 	Table[
-		Append[ormSkipSelector[states], {}],
+		Append[skipSelector[states], {}],
 		tapeLength - replacementSize + extraSkips]
 
 
@@ -125,7 +125,7 @@ selectors[rule_?ruleQ, states_Integer] :=
 					Tuples[Range[0, states - 1], stepReplacementSize[rule]]},
 		MapIndexed[
 			Append[
-				ormSkipSelector[states],
+				skipSelector[states],
 				Join[
 					Table[states + 1, Length[orderedRule] - First[#2]],
 					#1]] &,
@@ -133,14 +133,19 @@ selectors[rule_?ruleQ, states_Integer] :=
 
 
 digitWeights[states_Integer, replacementSize_Integer] :=
-	Table[v * states^i,
-		{i, 0, replacementSize - 1},
-		{v, states}]
+	Prepend[0]/@
+		Table[v * states^i,
+			{i, 0, replacementSize - 1},
+			{v, states-1}]
 
 
 numberedPads[states_Integer, replacementSize_Integer] :=
-	Append[{}] /@ digitWeights[states, replacementSize] /.
-		n_Integer :> Append[Table[states + 1, n - 1], states]
+	Append[{}] /@ 
+		MapAt[
+			Map@Append[states],
+			digitWeights[states, replacementSize]/.
+				n_Integer:>Table[states + 1, n],
+			-1]
 
 
 ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :=
@@ -148,10 +153,9 @@ ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :
 		Append[{}] /@
 			Join[
 				numberedPads[states, replacementSize],
-				ormSkips[states, replacementSize, tapeLength,
-					Total[Min /@ digitWeights[states, replacementSize]] - 1],
+				skips[states, replacementSize, tapeLength],
 				selectors[rule, states],
-				ormSkips[states, replacementSize, tapeLength, offset]]] /;
+				skips[states, replacementSize, tapeLength, offset]]] /;
 	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
 
 

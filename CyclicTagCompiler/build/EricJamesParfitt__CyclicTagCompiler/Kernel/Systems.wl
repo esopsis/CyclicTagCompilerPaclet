@@ -5,17 +5,14 @@
 
 
 (* ::Text:: *)
-(*These are the Wolfram Function Repository functions that run each kind of system.*)
-(*Each is looked up the first time it is used, so loading the paclet needs no network connection.*)
+(*These are Wolfram Function Repository functions, each looked up the first time it is used,*)
+(*so loading the paclet needs no network connection. CyclicTagSystem is defined in CyclicTagSystem.wl.*)
 
 
 BeginPackage["EricJamesParfitt`CyclicTagCompiler`"];
 
 
 Begin["`Private`"];
-
-
-CyclicTagSystem := resourceFunction["CyclicTagSystemEvolveList"]
 
 
 NaryCyclicTag := resourceFunction["NaryCyclicTag"]
