@@ -22,20 +22,13 @@ ObliviousRingMachineToCyclicTagRule[rule_?ormRuleQ, tapeLength_Integer, tapeStat
 		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates]
 
 
-(* The number of n-ary cyclic tag symbols: one more than the largest symbol in the compiled rule, and at least tapeStates. *)
-ormStatesCheck[rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer] :=
-	Max[
-		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates] + 1,
-		tapeStates]
-
-
 Options[ObliviousRingMachineToCyclicTagInit] = Options[NaryCyclicTagToCyclicTagInit];
 
 
 ObliviousRingMachineToCyclicTagInit[init_List, rule_?ormRuleQ, tapeStates_Integer : 2, opts : OptionsPattern[]] :=
 	NaryCyclicTagToCyclicTagInit[
 		init,
-		ormStatesCheck[rule, Length[init], tapeStates],
+		ObliviousRingMachineToNaryCyclicTagRule[rule, Length[init], tapeStates],
 		opts]
 
 
@@ -50,7 +43,7 @@ ObliviousRingMachineToCyclicTagSteps[
 		opts : OptionsPattern[]] :=
 	NaryCyclicTagToCyclicTagSteps[
 		ObliviousRingMachineToNaryCyclicTagSteps[steps, rule, tapeLength, tapeStates],
-		ormStatesCheck[rule, tapeLength, tapeStates],
+		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates],
 		opts]
 
 
@@ -66,7 +59,7 @@ DecodeCyclicTagToObliviousRingMachine[
 	DecodeNaryCyclicTagToObliviousRingMachine[
 		DecodeCyclicTagToNaryCyclicTag[
 			history,
-			ormStatesCheck[rule, tapeLength, states],
+			ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, states],
 			opts],
 		rule,
 		states]
