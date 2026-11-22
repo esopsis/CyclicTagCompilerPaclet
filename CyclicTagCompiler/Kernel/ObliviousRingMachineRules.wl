@@ -112,37 +112,20 @@ skipSelector[states_Integer] :=
 	List /@ Range[0, states - 1]
 
 
-skips[states_Integer, replacementSize_Integer, tapeLength_Integer, extraSkips_Integer:0] :=
-	Table[
-		skipSelector[states],
-		tapeLength - replacementSize + extraSkips]
+mapIndexedReversed[f_, expr_] := MapIndexed[f[#1, Length[expr] - #2 + 1]&, expr]
+
+
+padSelectors[unPaddeds_, padding_Integer, states_Integer]:=
+	ArrayPad[#, {padding, 0}, states] & /@ unPaddeds
 
 
 selectors[rule_?ruleQ, states_Integer] :=
-	With[{orderedRule =
+	mapIndexedReversed[
+		padSelectors[#1, First[#2] - 1, states] &,
+		Partition[
 			Replace[rule] /@
-				Reverse /@
-					Tuples[Range[0, states - 1], stepReplacementSize[rule]]//Echo},
-		MapIndexed[
-			Append[
-				skipSelector[states],
-				Join[
-					Table[states + 1, Length[orderedRule] - First[#2]],
-					#1]] &,
-			orderedRule]]
-
-
-mapIndexedReversed[f_,expr_]:=MapIndexed[f[#1,Length[expr]-#2+1]&,expr]
-
-
-padSelectors[unPaddeds_,padding_Integer,states_Integer]:=
-	ArrayPad[#,{padding,0},states]&/@unPaddeds
-
-
-selectors[rule_?ruleQ, states_Integer] :=
-	mapIndexedReversed[padSelectors[#1,First[#2]-1,states]&,
-		Partition[Replace[rule] /@
-				Tuples[Range[0, states-1], stepReplacementSize[rule]],states]]
+				Tuples[Range[0, states - 1], stepReplacementSize[rule]],
+			states]]
 
 
 digitWeights[states_Integer, replacementSize_Integer] :=
@@ -152,39 +135,26 @@ digitWeights[states_Integer, replacementSize_Integer] :=
 			{v, states - 1}]
 
 
-numberedPads[states_Integer, replacementSize_Integer] :=
-	Append[
-		digitWeights[states, replacementSize]/.
-				n_Integer:>Table[states, n],
-			List/@Range[0,states-1]]
-
-
 numberedPads[rule_?ruleQ, states_Integer, replacementSize_Integer] :=
 	Append[
-		digitWeights[states, replacementSize]/.
-				n_Integer:>Table[states, n],
-			Table[Prepend[i][Table[states,Length@selectors[rule,states]]],{i,0,states-1}]]
+		digitWeights[states, replacementSize] /.
+				n_Integer :> Table[states, n],
+		Table[
+			Prepend[i][
+				Table[states, Length @ selectors[rule, states] - 1]], 
+			{i, 0, states - 1}]]
 
 
 ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :=
 	With[{replacementSize = stepReplacementSize[rule]},
 		Append[{}] /@
 			Join[
-				numberedPads[states, replacementSize],
-				skips[states, replacementSize, tapeLength],
+				numberedPads[rule, states, replacementSize],
+				Table[skipSelector[states], tapeLength - replacementSize],
 				selectors[rule, states],
-				skips[states, replacementSize, tapeLength, offset+3]]] /;
-	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
-
-
-ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :=
-	With[{replacementSize = stepReplacementSize[rule]},
-		Append[{}] /@
-			Join[
-				numberedPads[states, replacementSize],
-				Table[skipSelector[states],tapeLength - replacementSize],
-				selectors[rule, states],
-				Table[skipSelector[states],tapeLength + offset]]] /;
+				Table[skipSelector[states],
+					tapeLength - replacementSize + 
+						Length @ selectors[rule,states] - 1 + offset]]] /;
 	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
 
 
@@ -195,7 +165,8 @@ maxStates[rules_List, tapeStates_Integer] :=
 	Max[
 		Cases[
 			rules /.
-				(h : Rule | RuleDelayed)[lhs_, rhs_] /; ! MatchQ[Unevaluated[rhs], _Integer | {___Integer}] :>
+				(h : Rule | RuleDelayed)[lhs_, rhs_] /; 
+						! MatchQ[Unevaluated[rhs], _Integer | {___Integer}] :>
 					h[lhs, {}],
 			_Integer,
 			Infinity] + 1,
@@ -209,7 +180,8 @@ ormToNCTStep[tapeLength_Integer, states_Integer][{rule_?ruleQ /; AllSameBy[Keys[
 ObliviousRingMachineToNaryCyclicTagRule[rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer : 2] :=
 	With[{modified = ormRuleNormalize[rule]},
 		Catenate[
-			ormToNCTStep[tapeLength, maxStates[First /@ modified, tapeStates]] /@ modified]]
+			ormToNCTStep[tapeLength, maxStates[First /@ modified, tapeStates]] /@ 
+				modified]]
 
 
 End[];
