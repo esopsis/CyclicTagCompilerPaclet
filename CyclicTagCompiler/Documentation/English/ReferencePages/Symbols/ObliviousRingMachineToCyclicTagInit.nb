@@ -77,12 +77,13 @@ Cell[TextData[{
  Cell[BoxData[
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "ed31ecb2-ab36-cd44-8fdc-403f2d10750a"],
- "-ary cyclic tag system has two more symbols than the ring machine. Each \
+ "-ary cyclic tag system has one more symbol than the ring machine. Each \
 symbol of ",
  Cell[BoxData[
   StyleBox["init", "TI"]], "InlineFormula", ExpressionUUID->
   "6f521e6a-da4f-ca41-855d-080242ab9afb"],
- " becomes a block of that many cells, all 0 except for a single 1, as in ",
+ " becomes a block with one cell for each symbol that survives the encoding, \
+all 0 except for a single 1, as in ",
  Cell[BoxData[
   ButtonBox["NaryCyclicTagToCyclicTagInit",
    BaseStyle->"Link",
@@ -410,7 +411,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->976712704, ExpressionUUID->"0f4032ee-6a5c-2c4d-803d-bdfa0ed1705b"],
 
-Cell[BoxData[RowBox[{"{", RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->807856415, ExpressionUUID->"fff48c46-4a7d-8a47-a81c-db896c0fe405"]
 }, Open  ]],
@@ -468,7 +469,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->902670340, ExpressionUUID->"6446c6a9-0ac8-bc4b-901e-95e99271ba83"],
 
-Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->994912301, ExpressionUUID->"c96e61c5-e5ee-d34f-b7d7-91bdb690559c"]
 }, Open  ]],
@@ -569,7 +570,7 @@ Cell[BoxData[
  CellID->620311288, ExpressionUUID->"b8514559-6cd0-9543-8cf5-37ebaa2b7616"],
 
 Cell["\<\
-The tape is encoded with two more symbols than the ring machine has:\
+The tape is encoded exactly as it is for the compiled n-ary rule:\
 \>", "ExampleText",
  CellID->195963183, ExpressionUUID->"fb7052b0-8e5f-c441-9e1c-ffff035aecac"],
 

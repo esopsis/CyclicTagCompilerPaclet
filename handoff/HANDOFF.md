@@ -1,14 +1,13 @@
-# Project state: the dropped-symbol optimization
+# Project state: the two cyclic tag encoding optimizations
 
-Status as of 2026-11-20. Author: Eric Parfitt. Originally written to hand the work to a
-different LLM assistant mid-stream; now kept as a description of where the optimization
+Status as of 2026-11-22. Author: Eric Parfitt. Originally written to hand the work to a
+different LLM assistant mid-stream; now kept as a description of where the optimizations
 landed and what is left.
 
-**Short version:** the optimization is finished, verified, documented and tested. The
-whole test suite passes (191 / 191) and every stored example in the documentation
-notebooks matches what the current code produces. The version bump and the rebuild are
-deliberately **not** done yet: Eric may land another optimization first and wants to
-switch versions once, for both.
+**Short version:** both optimizations are finished, verified, documented and tested, and
+they are now merged together on `Optimizations`. The whole test suite passes (191 / 191)
+and every stored example in the documentation notebooks matches what the current code
+produces. The version bump and the rebuild are deliberately **not** done yet.
 
 ## 1. What this repo is
 
@@ -29,35 +28,57 @@ Each layer ships four functions: `…Rule`, `…Init`, `…Steps`, and `Decode�
 `Kernel/CyclicTagCompiler.wl` holds all the usage messages and loads the
 implementation files in dependency order.
 
-## 2. The optimization
+## 2. The optimizations
 
-**Goal:** shrink the n-ary → cyclic tag blow-up.
+**Goal:** shrink the n-ary → cyclic tag blow-up. There are two independent optimizations,
+and they compose.
 
 Baseline encoding: n-ary symbol `s` becomes a one-hot block of `states` bits, so one
 n-ary step costs `states` cyclic tag steps.
 
-**The optimization:** some n-ary symbols are *never appended for* — their column is `{}`
-in every rule part (`deleteds` finds these). Those columns can be dropped, shrinking the
-block from `getStates[rule]` to `replacedStates[rule]`. On the oblivious-ring-machine
-path this is a real win, because the ORM compiler's top marker symbol (`states+1`,
-the delay marker) always has an all-empty column:
+### 2a. Dropped symbols (`"Optimization" -> "DeletedSymbolsHighest"`)
 
-| ORM rule | full block | optimized | saving |
+Some n-ary symbols are *never appended for* — their column is `{}` in every rule part
+(`deleteds` finds these). Those columns can be dropped, shrinking the block from
+`getStates[rule]` to `replacedStates[rule]`. On the oblivious-ring-machine path this is a
+real win, because the ORM compiler's delay marker always has an all-empty column.
+
+### 2b. Symbol reuse in the ORM → n-ary compilation
+
+The ORM compiler used to need **two** marker symbols: one to build the delay and one
+(`states+1`) to trigger the appendant. It now needs only **one**. A step that reads a
+window of `replacementSize` symbols turns the leading `replacementSize - 1` of them into
+a delay, exactly as before, but that delay now only selects a *group* of appendants.
+The last symbol of the window is appended to the tape as itself, and selects the
+appendant *within* that group — so the tape's own symbols do the final selection.
+
+This drops the n-ary alphabet from `states + 2` to `states + 1` and removes one rule part
+per ORM step. Selector groups go from `states^replacementSize` to
+`states^(replacementSize-1)`, which more than pays for the extra trailing skips.
+
+The two stack: the symbol-reuse output still leaves exactly one always-empty column, so
+2a then removes it. A 2-state ring machine ends up with 2-bit blocks where the
+unoptimized encoding used 4.
+
+### Combined effect
+
+`Tests/Regression.wlt` golden values across the three stages:
+
+| | baseline | +2a | +2a +2b |
 |---|---|---|---|
-| `{{{0,1}->{1,0}},2}` | 4 | 3 | 25% |
-| `{{{0,1}->{1,2},{2,0}->{0,1}},2}` | 5 | 4 | 20% |
+| `ObliviousRingMachineToCyclicTagSteps[6, {{Reverse,{},3},2}, 5, 3]` | 1080 | 864 | **468** |
+| `CellularAutomatonToCyclicTagSteps[3, 5]` | 960 | 720 | **450** |
+| `CellularAutomatonToCyclicTagSteps[3, 5, 2, 1/2, "InfiniteSteps"->True]` | 1080 | 810 | **504** |
+| `AutomataNetworkToCyclicTagSteps[2, …]` | 2576 | 1932 | **1200** |
 
-The saving shows up directly in the step counts (these are the `Tests/Regression.wlt`
-golden values, before and after):
+One exception worth knowing: `"TargetSystem" -> "Rule110"` pads the symbol count up to a
+multiple of 6, which can swallow the saving entirely —
+`ObliviousRingMachineToCyclicTagSteps[6, swap, 4, 2, "Rule110"]` is 360 both with and
+without 2b.
 
-| | before | after |
-|---|---|---|
-| `ObliviousRingMachineToCyclicTagSteps[6, {{Reverse,{},3},2}, 5, 3]` | 1080 | **864** |
-| `CellularAutomatonToCyclicTagSteps[3, 5]` | 960 | **720** |
-| `AutomataNetworkToCyclicTagSteps[2, …]` | 2576 | **1932** |
-
-Every *decoded* evolution is unchanged — the optimization only narrows the cyclic tag
-encoding the compilation passes through, so it is invisible at the ORM level and above.
+Every *decoded* evolution is unchanged by either optimization — they only narrow the
+cyclic tag encoding the compilation passes through, so they are invisible at the ORM
+level and above.
 
 **The accepted trade-off.** Dropping columns renumbers the symbols, so decoding no
 longer returns the original n-ary evolution — it returns an *isomorphic* one. Eric has
@@ -122,7 +143,7 @@ a plain cyclic `CellularAutomaton[rule, init, {t, All}]` shows a spurious 0/24. 
 | `Regression.wlt` | 57 / 57 |
 
 `NaryCyclicTag.wlt` and `Regression.wlt` were rewritten for the current signatures;
-`Regression.wlt`'s golden values were recomputed for the optimization. The other six
+`Regression.wlt`'s golden values were recomputed for both optimizations. The other six
 files were never affected by it.
 
 ## 3. The current API
@@ -187,7 +208,20 @@ Eric has explicitly signed off on all of the following:
   which `CyclicTagSystem` can actually run — instead of `{}`, which used to stick on an
   unevaluated `Cyclic[{}][1]` and never complete the round trip.
 - **Stale docs and tests.** Usage messages, 16 reference pages, the guide, the tutorial
-  and `ResourceDefinition.nb` all describe the current API and the optimization.
+  and `ResourceDefinition.nb` all describe the current API and both optimizations.
+- **The symbol-reuse WIP bugs.** `numberedPads` was called with two arguments but defined
+  with three; the trailing skip count was missing a term and is now
+  `tapeLength - replacementSize + Length@selectors[rule, states] - 1 + offset`, which is
+  `states^(replacementSize-1)` groups minus the ones already paid for. The superseded
+  `selectors` definition (with a leftover `//Echo`) and the unused `skips` are gone.
+- **`ormStatesCheck` inferring the alphabet from the largest symbol.** At
+  `replacementSize == 1` there is only one selector group, so symbol reuse removes the
+  marker from the compiled rule entirely and `Max[rule + 1]` undercounted — the rule got
+  wider blocks than the init, steps and decoder. The function is gone: the merged ORM
+  layer passes the compiled rule down and lets `getStates[rule] = Max[Length /@ rule, 0]`
+  do it, which reads the alphabet off the rule's arity. **The alphabet size is the number
+  of appendants per rule part, never one more than the largest symbol present** — both
+  branches arrived at this independently, and it is the invariant to preserve.
 
 ## 6. How to test (important — the obvious routes don't work)
 
@@ -229,6 +263,28 @@ Traps that have already burned time here:
    `ToString[boxes, InputForm]` emits `\[Rule]` and `\[LeftSkeleton]` as literal
    characters that can vanish in transit, silently turning an operator into `""`. Pass
    `CharacterEncoding -> "ASCII"`.
+8. **`MakeBoxes` has `HoldAllComplete`.** `MakeBoxes[v, StandardForm]` where `v` is your
+   local variable produces boxes for the *symbol name* (`Global`got$38459`), not its
+   value, and the result looks plausible until you read the diff. Use `ToBoxes`.
+9. **Number Output cells consistently.** A generator that pairs each Output with the
+   preceding Input and a text splicer that counts every `Cell[…, "Output", …]` in
+   document order disagree wherever a notebook has an Output with no Input before it
+   (`ResourceDefinition.nb` has one), and you silently patch the wrong cells. Count every
+   Output cell in document order on both sides, and compare only where the
+   *immediately* preceding cell is an Input.
+10. **Walk nested cells.** `Cell[CellGroupData[{…}]]` wraps the real cells, so a text
+    scanner that skips past each matched `Cell[…]` never sees them and finds nothing.
+11. **Stored Output cells carry front-end formatting options.** `Grid`/`Column` outputs
+    come back with `ItemSize -> {Automatic, Automatic}` that re-evaluating the input
+    never produces, so a naive comparison reports a mismatch on cells that are fine.
+    Normalize with something like `e //. (h:Grid|Column|TableForm)[a_, ___] :> h[a]`.
+12. **Graphics cells can be regenerated headlessly**, but only after you prove they are
+    stale — evaluate the input against the old and new trees and compare
+    `Hash[ToString[ToBoxes[…], InputForm]]`, rather than guessing from the input text
+    (most plots here show *decoded* evolutions, which never change). `ToBoxes` gives a
+    `GraphicsBox` with an uncompressed `RasterBox`, ~17× larger than the front end's
+    `CompressedData`. `CompressedData[…]` evaluates in the kernel, so build the text with
+    a placeholder and substitute `"CompressedData[\"" <> Compress[data] <> "\"]"`.
 
 Reference systems for differential testing come from the resource-function resolver,
 `EricJamesParfitt`CyclicTagCompiler`Private`resourceFunction`, e.g.
@@ -272,14 +328,21 @@ everything else.
 
 ## 8. What is left
 
-1. **Possibly another optimization.** Eric is considering one, and wants to bump the
-   version once for both rather than twice.
-2. **Bump the version and rebuild** once that settles — a major bump, per section 3 —
-   and commit the resulting archive alongside the 1.0.0 and 2.1.0 ones.
-3. **Merge to `main`.** This work lives on `Optimizations`; `main` is still at
-   `5e12cd9 Rebuild the paclet at version 2.1.0`.
-4. **Update the Community article** to describe the optimization, the relabeling contract
-   and the new n-ary signatures. Eric is doing this himself.
+1. **Bump the version and rebuild** — a major bump, per section 3 — and commit the
+   resulting archive alongside the 1.0.0 and 2.1.0 ones. Both optimizations have landed,
+   so there is nothing further to wait for.
+2. **Merge to `main`.** This work lives on `Optimizations`; `main` is still at
+   `5e12cd9 Rebuild the paclet at version 2.1.0`. The symbol-reuse branch
+   (`ORMToNCTNoXsWIP`) has already been merged into `Optimizations`.
+3. **Update the Community article** to describe both optimizations, the relabeling
+   contract and the new n-ary signatures. Eric is doing this himself.
+
+One known cosmetic leftover: the `ObliviousRingMachine.nb` "Neat Examples" output that
+plots `Grid[Prepend[{"Tape","Rule"}][ObliviousRingMachine[…]]]` cannot be verified by the
+notebook-checking harness, because the resource function does not resolve inside the
+sandbox context it evaluates in. It is upstream of both optimizations and
+`ObliviousRingMachine.wlt` is 24/24, so the stored output is believed correct — it is
+simply unchecked.
 
 ## 9. Working agreement with Eric
 

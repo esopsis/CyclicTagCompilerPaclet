@@ -542,10 +542,10 @@ Cell[TextData[{
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "00d7cf2b-aac5-534e-88e9-8c860c7c3876"],
  "-ary cyclic tag system reads one symbol at a time, so to emulate a step \
-that reads several symbols, it turns each symbol it reads into a delay: it \
-appends a run of marker symbols whose length depends on the symbol and on its \
-position in the window. For windows of 3 symbols out of 10, the delays could \
-be these, one row for each position in the window:"
+that reads several symbols, it turns all but the last symbol it reads into a \
+delay: it appends a run of marker symbols whose length depends on the symbol \
+and on its position in the window. For windows of 3 symbols out of 10, the \
+delays could be these, one row for each position in the window but the last:"
 }], "Text",
  CellID->2981346, ExpressionUUID->"1d0dd3d9-5e44-4845-adfe-480a93fa7709"],
 
@@ -558,34 +558,25 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"v", " ", 
       RowBox[{"10", "^", "i"}]}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", " ", "0", ",", " ", "2"}], "}"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"v", ",", " ", "0", ",", " ", "9"}], "}"}]}], "]"}], ",", " ", 
+     RowBox[{"{",
+      RowBox[{"i", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ",
+     RowBox[{"{",
+      RowBox[{"v", ",", " ", "0", ",", " ", "9"}], "}"}]}], "]"}], ",", " ",
    RowBox[{"Frame", " ", "->", " ", "All"}]}], "]"}]], "Input",
  CellLabel->"In[3]:=",
  CellID->154763840, ExpressionUUID->"ea0dd010-cd09-514f-9682-22832302e850"],
 
-Cell[BoxData[
- TagBox[GridBox[{
-    {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"},
-    {"0", "10", "20", "30", "40", "50", "60", "70", "80", "90"},
-    {"0", "100", "200", "300", "400", "500", "600", "700", "800", "900"}
-   },
-   AutoDelete->False,
-   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
-   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
-  "Grid"]], "Output",
+Cell[BoxData[TagBox[GridBox[{{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}, {"0", "10", "20", "30", "40", "50", "60", "70", "80", "90"}}, AutoDelete -> False, GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], "Grid"]], "Output",
  CellLabel->"Out[3]=",
  CellID->911055395, ExpressionUUID->"f20fbc7d-6304-1d49-b834-ee83817c8d37"]
 }, Open  ]]
 }, Open  ]],
 
 Cell["\<\
-Choosing one delay from each row gives a different total for every window, \
-from 0 to 999, and a symbol 0 adds no delay at all. Only the run for the last \
-symbol of the window ends with the marker that triggers the replacement, so \
-nothing happens before the whole window has been read.\
+Choosing one delay from each row gives a different total for every way the \
+window can begin, from 0 to 99, and a symbol 0 adds no delay at all. The last \
+symbol of the window is appended to the tape as itself rather than as a \
+delay, so nothing happens before the whole window has been read.\
 \>", "Text",
  CellID->493583835, ExpressionUUID->"12c55b8d-04ff-444e-ad24-467c03522add"],
 
@@ -595,10 +586,12 @@ Cell[TextData[{
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "4131fdea-2a77-cf44-a18a-24375cf1dc27"],
  "-ary system skips past the rest of the tape, symbol by symbol, until the \
-marker symbols come round again. The total delay then decides which of the \
-following rule parts sees the last marker, and that rule part appends the \
-replacement for the window. Finally the system skips on to where the next \
-ring machine step starts."
+marker symbols come round again. The total delay then decides which group of \
+the following rule parts is reached, and the last symbol of the window, still \
+on the tape, decides which rule part inside that group appends the \
+replacement. Because the tape's own symbols make that second choice, the \
+compilation needs only one marker symbol. Finally the system skips on to \
+where the next ring machine step starts."
 }], "Text",
  CellID->733945943, ExpressionUUID->"04b7c860-9313-874f-9afa-fb7ae5ed46bc"],
 
@@ -631,9 +624,7 @@ Cell[BoxData[
  CellLabel->"In[5]:=",
  CellID->513641876, ExpressionUUID->"f021d316-dc8a-9647-b190-d0f1bf275313"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"26", ",", "4"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"24", ",", "3"}], "}"}]], "Output",
  CellLabel->"Out[5]=",
  CellID->194386813, ExpressionUUID->"c70a4291-5218-9a41-b6a2-8be6eef252f3"]
 }, Open  ]]
@@ -1353,7 +1344,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->389782504, ExpressionUUID->"9daba228-15b8-5f41-9cd5-90cee5191911"],
 
-Cell[BoxData[RowBox[{"{", RowBox[{"72", ",", "144"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"46", ",", "138"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->638848494, ExpressionUUID->"ed3cf93d-173b-d641-b851-a94ca07b8b22"]
 }, Open  ]],
@@ -1431,7 +1422,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->825897897, ExpressionUUID->"794ed9e8-9983-a341-9531-e50600900d70"],
 
-Cell[BoxData[RowBox[{"{", RowBox[{"42", ",", "54", ",", "66", ",", "78", ",", "90"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"26", ",", "34", ",", "42", ",", "50", ",", "58"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->812078781, ExpressionUUID->"fb737608-129f-e649-a9bd-50ff4d5b01cc"]
 }, Open  ]]

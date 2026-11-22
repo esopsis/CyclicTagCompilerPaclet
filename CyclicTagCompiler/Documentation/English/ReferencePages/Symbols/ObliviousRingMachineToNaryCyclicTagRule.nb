@@ -226,15 +226,11 @@ initial condition needs no conversion. The ",
  Cell[BoxData[
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "debec4c6-81d5-184b-96bf-1a5c8b50465d"],
- "-ary system uses two more symbols, ",
+ "-ary system uses one more symbol, ",
  Cell[BoxData[
   StyleBox["m", "TI"]], "InlineFormula", ExpressionUUID->
   "2367cc08-1626-8e4d-8860-1bc3c39aeac1"],
- " and ",
- Cell[BoxData[
-  StyleBox["m", "TI"]], "InlineFormula", ExpressionUUID->
-  "1ab64a06-4907-714e-a00b-99d6eeb79d37"],
- "+1, as markers."
+ ", as a marker."
 }], "Notes",
  CellID->819719427, ExpressionUUID->"e20147dc-21cc-214f-b7e9-024c887a708d"],
 
@@ -243,15 +239,17 @@ Cell[TextData[{
  Cell[BoxData[
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "fcb34035-8fef-384c-9119-2a3089e68933"],
- "-ary rule parts. The first ones read the window one symbol at a time, \
-turning each symbol into a delay: its value times a power of ",
+ "-ary rule parts. All but the last of them read the window one symbol at a \
+time, turning each symbol into a delay: its value times a power of ",
  Cell[BoxData[
   StyleBox["m", "TI"]], "InlineFormula", ExpressionUUID->
   "8a998190-4ccf-6643-bfd2-08bbc3a041a4"],
- ". A symbol 0 adds no delay, and only the delay of the last symbol read ends \
-with the marker that triggers the replacement. Then the system skips around \
-the rest of the tape, uses the total delay to choose the appendant that \
-writes the replacement, and skips on to where the next step starts."
+ ". A symbol 0 adds no delay. The total delay picks out a group of \
+appendants, and the last symbol of the window is appended to the tape as \
+itself and picks the appendant within that group, so the tape symbols do the \
+final selection and no second marker symbol is needed. Then the system skips \
+around the rest of the tape, uses those two selections to reach the appendant \
+that writes the replacement, and skips on to where the next step starts."
 }], "Notes",
  CellID->272569159, ExpressionUUID->"a304f657-2ca0-fe42-afef-bdfbaddd1ab0"],
 
@@ -957,8 +955,8 @@ Cell[BoxData[
  CellID->900759364, ExpressionUUID->"d6f26d03-3799-c646-83a5-b627441bbe87"],
 
 Cell["\<\
-A 2-symbol ring machine compiles to a 4-symbol cyclic tag system, with the \
-marker symbols 2 and 3:\
+A 2-symbol ring machine compiles to a 3-symbol n-ary cyclic tag system, with \
+the marker symbol 2:\
 \>", "ExampleText",
  CellID->84945343, ExpressionUUID->"8a49d138-f7b1-934e-9d20-9b1223517f02"],
 
@@ -978,9 +976,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->343270264, ExpressionUUID->"b8d97c6a-382f-304b-9466-09e8d965fd0d"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "1", ",", "2"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->354032083, ExpressionUUID->"8bdab694-e0af-f942-832a-e6a307e37c80"]
 }, Open  ]],
@@ -1291,7 +1287,7 @@ Cell[TextData[{
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "c65f6515-b3c1-ca4f-95eb-e87916c78723"],
  "-ary cyclic tag evolution that emulates rule 30 on 5 cells, with the marker \
-symbols in color:"
+symbol in color:"
 }], "ExampleText",
  CellID->568656785, ExpressionUUID->"e1671d6e-7fdc-eb46-a8da-f6f34e9f1616"],
 
@@ -1325,54 +1321,14 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"-", "1"}], " ", "->", " ", "White"}], ",", " ", 
       RowBox[{"0", " ", "->", " ", "LightGray"}], ",", " ", 
-      RowBox[{"1", " ", "->", " ", "Black"}], ",", " ", 
-      RowBox[{"2", " ", "->", " ", "Red"}], ",", " ", 
-      RowBox[{"3", " ", "->", " ", "Orange"}]}], "}"}]}], ",", " ", 
+      RowBox[{"1", " ", "->", " ", "Black"}], ",", " ",
+      RowBox[{"2", " ", "->", " ", "Red"}]}], "}"}]}], ",", " ",
    RowBox[{"AspectRatio", " ", "->", " ", 
     RowBox[{"1", "/", "2"}]}]}], "]"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->933083280, ExpressionUUID->"8d442500-8609-0f4d-a38f-0f89d1fc2286"],
 
-Cell[BoxData[
- GraphicsBox[RasterBox[CompressedData["
-1:eJztm8FtHDEMRRfIMVWkhhTgHlJCAJ9dTtrL3ReXYDtGsJ6lKXFEkf9T2g8s
-vg8DLf/bGYmaGf/4/fTr8dvlcvnz9vn+9nn/+0MvD5cb/fyn5werH8ep7n9v
-eOzDx1b/OB90Pi+HWXzQ+aI4+Pjw+iwOa/CRyuWD93adcXzQudt+PW/35qNd
-v7vx6XPYg884h+p8bOPU4zOLQ3U+ZzkcvT9+zPey+b77TRuH3fjMut6vqsLH
-Vk8eHzYOKD5VOOTyyXapXD4sblcMH7y364zjg85t5RDNB53by2EWH3Tutl9V
-/Tz3+Tr9YQyH3fjsu7+I4VCdTzSHKnxQHNj4sHHI42M7no3D/PsbPp5sHLz3
-N6Q4+GS7XTF8WNyvWfMVytt1+lWdQzSf7Jw2l8rhg849Pk9UOc99bl1/pdbi
-4+1PpGryierfpLj5ZPe3Uhx8WPp/qVw+7PsjqRg+bBzy+NiOZ+Mwzud4/K1L
-rc3HzkFTLp9s98vHh8XjxNEP9L1dZ7Tw+Y8ulcMHnTtqnjwrdO6oeQJd/yz3
-9iea0LlmcdiNT3Z/q2kVDtX5sPT/Z7UKBzY+bByy+fSOZ+OQd//BNg4bh7z7
-D23Nrj/bo8WWF8VBEzr3nUPbb89blNjOBxQfNg69OqP4oK+L6vVHzQ+78mHp
-89HOvg+qxqE6H5Z90FmtwoGFT2+cqnxmceiNz84nmoOm0fpZPFrofH2/P/f/
-7FJ7PvfXrl+pPfhY5zeptfh41y+pWnx647PzQa2bbHzY+gj0/BY9P3iFzhU9
-T3qFzhu1XqzCh2W/rCk6f+97WfigOPTqYb+fEM1BE/q6HvdafW8+hz35SOXw
-QefWfLz/X4vP/P1RTT55+0duPlH9gBQ3n+znL1IcfFieT0nl8NF059PWqnz0
-fuqc0Ot+9HrhFTqX1Xv1s983iOag6SwfdL6+x6zL7O852DnsyUcqlw+L2zWX
-Dzq35uPvz6/FZ7x/01STz/z+VhM3n7z+XxMHH/z+SFMOn97xq/Gx91Htb6/L
-5zh+/7zgmK/Y1s2r9uAz/jx6DT69OqP4oHOj5kltHLyPrTuaRvmwuFQMH14/
-m2ttPva8Z49vj4POrfn8959r8sl7P5ybD/79eRQf2/i8fKI5VOHjzf+19+uJ
-/l04fHy/sBaf+fupmnzmvx9ek0/e+/NsfGzfi+cTlf+/+36X9f//gu28jfZ2
-rn34jOVaj88rQN7p1g==
-   "], {{0, 0}, {11, 151}}, {0, 1}],
-  AspectRatio->NCache[1/2, 0.5],
-  Frame->Automatic,
-  FrameLabel->{None, None},
-  FrameTicks->{{None, None}, {None, None}},
-  GridLinesStyle->Directive[
-    GrayLevel[0.5, 0.4]],
-  Method->{
-   "GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, 
-    "DefaultGraphicsInteraction" -> {
-     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
-      "Effects" -> {
-       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
-        "Droplines" -> {
-         "freeformCursorMode" -> True, 
-          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultPlotStyle" -> 
-    Automatic}]], "Output",
+Cell[BoxData[GraphicsBox[RasterBox[CompressedData["1:eJzt3cFtVTEQhWFLsKMKaqCANMCKElhEYoVE6IUi2VACCJEn0CVhbGzPf8YnC/SiHCV+8+Xd8R0n5PX7j+/uv7TWHl7++Ofth4fP96/+eO/F7+99evPz7evd9QEn2H69XR/8Nfjt7vqgVvA50HCxdORp5c8AvaX/9d1veUJwyiW3lDzTaS9oKXmm095LruWLgYaDli8GGg5avi0AXVUsKXnIlRTaQ8OfcX7wFHloD53/peevkSkPveSWkp/hVOM+tIj8DCcoKKf8kI53DKjlV4Benvq+fcRyeUj5oa9QBXlm+aGgCvLM8quDJsozyw8dLFieE4ROiiyvARoOWn4F6OiKteW3lh/6CrX8cifoJdfyo05Q0PlVVVjjVvljeqjgGgUGC4JVVTtnQ0+KZKuK7qFSM3eDTgENBznykPJDL7lh0HDQoKNB6PFZOGjQlgmaKM8sP3SwYHlOEDr6s/xoUH30Z/nWC9q/Ym35reVHv0It319+NKjlCfLQHnr5uOX3T4os/0RQD9TyS4J5u9yC8rS9TsZtS015iBMUNBxkbjgUgtDjs3DQoG0BqII8s/zQS66OPK386MGC5QlB6OjP8qNB9dGf5VsvqMJwxdvhW/CY47PwGsXloT101ZeuL6/eQxXWuFXex2fcNQoMFgSrqnbQAz1tEa8quodKzdwNCgUNB5lbTSho+nBFdlwDBQ0XS0eeVn4oaDiYLk8rP3qwYHlCED36s3x/sMboz/K34DHHZ6NPBvLCQ/dQyy8Monuo5fuDNXqowho3yR/WQ6XWmA1as6qJQRnQ+lVF99BEUII8xOkwUNpW06AGBd62KIDWl0cPFhSCeqCJOxOD9gdr3Ica9BZE91DL9wdr9FCFNWJGfwqDOss/PmBvigjykNaI7qGWXxjMeIWWki8Meqa8QTuCslU1aLHrHhQ0/UdZLd8f9C8raThBb1ssvzwIHf1ZfjSoPvqzfOsFVbgZVJDXA7V8bI3ZoPPnOpaPrTEb1PJPBLfKq2+KRmuAfDIz5I/ZFI0+GcjdiDdFBt0HqiBPcyoGCimWQrDGaQutquqglucE/ZeVNJygkyLLLw9Cf+ovXZ7mhN7lKsjTnKCX3M6g5fuDhw3n68t7OF9M/rA/xONNUaiqlm+1QMNBy7d80JSzkYLyeqCWjwXzQDuLxZbfWlV1UMtzgj5t0XCC9tB0eVr50bctlicE1We5lm+9oIk7EwV5JdDl39Ta8s9UFQoarqrlOfLoWa7lHx9QQcNBy4/Kq5+HLpeHtEZ0D7X8wuDe25aC8kqgiY1MQX5G+aGgifLMqkJBL8X879fTKY0MCjq//JZfHoT+542r5Gnlh962zHea/xlPkYcen1l+NAgd/V0+bvn9myLLlwG1fM8aBS65lufIQ89DLd+zRoFNkeVH5dE/JEaQh9yNQEd/Yaf5QYOSJq8+FZvYQ+vfi5cK1jhtoVVVHdTymOB3Phjgew=="], {{0, 0}, {11, 151}}, {0, 1}], AspectRatio -> NCache[1/2, 0.5], Frame -> Automatic, FrameLabel -> {None, None}, FrameTicks -> {{None, None}, {None, None}}, GridLinesStyle -> Directive[GrayLevel[0.5, 0.4]], Method -> {"GridLinesInFront" -> True, "DefaultBoundaryStyle" -> Automatic, "DefaultGraphicsInteraction" -> {"Version" -> 1.2, "TrackMousePosition" -> {True, False}, "Effects" -> {"Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, "Droplines" -> {"freeformCursorMode" -> True, "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultPlotStyle" -> Automatic}]], "Output",
  CellLabel->"Out[2]=",
  CellID->846128260, ExpressionUUID->"18f49421-2637-074b-be43-69266841242e"]
 }, Open  ]],

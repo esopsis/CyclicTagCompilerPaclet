@@ -958,7 +958,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->659597907, ExpressionUUID->"e0d27436-e1e1-b74c-ada8-4aa4a471a815"],
 
-Cell[BoxData[RowBox[{"{", RowBox[{"33", ",", "66"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"20", ",", "60"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->744356178, ExpressionUUID->"929ab16d-d944-7745-98ef-43478ef69204"]
 }, Open  ]],
@@ -1101,17 +1101,17 @@ Cell[TextData[{
   StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->
   "073bd867-ed25-7449-a769-a75103ecc5e4"],
  "-ary rule part becomes one appendant for each symbol that survives the \
-encoding, which here is 3 of the ",
+encoding, which here is 2 of the ",
  Cell[BoxData[
   StyleBox["m", "TI"]], "InlineFormula", ExpressionUUID->
   "88fa4696-c4b8-2045-af29-dcdcbef42d81"],
- "+2 = 4 symbols:"
+ "+1 = 3 symbols:"
 }], "ExampleText",
  CellID->26372532, ExpressionUUID->"1cf9a80f-c43f-cd40-896c-e70ee2afb8a4"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[RowBox[{RowBox[{"Length", "[", RowBox[{"ObliviousRingMachineToCyclicTagRule", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], ",", "4"}], "]"}], "]"}], "\[Equal]", RowBox[{"3", " ", RowBox[{"Length", "[", RowBox[{"ObliviousRingMachineToNaryCyclicTagRule", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], ",", "4"}], "]"}], "]"}]}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"Length", "[", RowBox[{"ObliviousRingMachineToCyclicTagRule", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], ",", "4"}], "]"}], "]"}], "\[Equal]", RowBox[{"2", " ", RowBox[{"Length", "[", RowBox[{"ObliviousRingMachineToNaryCyclicTagRule", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], ",", "4"}], "]"}], "]"}]}]}]], "Input",
  CellLabel->"In[1]:=",
  CellID->355001580, ExpressionUUID->"6e8bd943-cf9e-454e-b6b1-2a488378afeb"],
 

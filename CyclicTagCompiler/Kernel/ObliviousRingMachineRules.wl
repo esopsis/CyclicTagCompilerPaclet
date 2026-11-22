@@ -98,9 +98,12 @@ ObliviousRingMachineToNaryCyclicTagRule::nni = "Negative offsets not currently i
 
 
 (* ::Text:: *)
-(*The n-ary cyclic tag system uses the ring machine's symbols 0, ..., states - 1, plus two marker symbols: states and states + 1.*)
-(*Each ring machine step reads replacementSize symbols, turns them into a delay (a sum of digit weights) made of marker symbols,*)
-(*skips around the tape, uses the delay to select the appendant for the right replacement, and skips to the next step's position.*)
+(*The n-ary cyclic tag system uses the ring machine's symbols 0, ..., states - 1, plus one marker symbol: states.*)
+(*Each ring machine step reads replacementSize symbols. The leading replacementSize - 1 of them become a delay*)
+(*(a base-states sum of digit weights) written in marker symbols, which selects a group of appendants. The last*)
+(*symbol read is appended to the tape as itself and selects within that group, so the tape symbols do the final*)
+(*selection and no second marker symbol is needed. Between and after those selections the compilation skips*)
+(*around the tape, and then skips to the next step's position.*)
 
 
 (* A step with no rules still reads (and rewrites unchanged) one symbol, then rotates. *)
