@@ -2008,21 +2008,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-   RowBox[{"CyclicTagSystem", "[", 
-    RowBox[{
-     RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-      RowBox[{"{", 
-       RowBox[{"1", ",", " ", "0"}], "}"}], "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-      RowBox[{"6", ",", " ", "2"}], "]"}]}], "]"}], "]"}], " ", "===", " ", 
-  RowBox[{"NaryCyclicTag", "[", 
-   RowBox[{"rule", ",", " ", 
-    RowBox[{"{", 
-     RowBox[{"1", ",", " ", "0"}], "}"}], ",", " ", "6"}], "]"}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"6", ",", "rule"}], "]"}]}], "]"}], ",", "rule"}], "]"}], "===", RowBox[{"NaryCyclicTag", "[", RowBox[{"rule", ",", RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", "6"}], "]"}]}]], "Input",
  CellLabel->"In[2]:=",
  CellID->2655583, ExpressionUUID->"c2e03a04-ac18-714f-91ce-bade1631259e"],
 

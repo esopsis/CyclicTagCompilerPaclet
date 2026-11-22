@@ -141,7 +141,7 @@ ObliviousRingMachineToCyclicTagRule"]], "InlineFormula", ExpressionUUID->
 }], "Notes",
  CellID->875292146, ExpressionUUID->"fa1f1822-b3c2-8f40-9746-0e52c218f7c0"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->744851105, ExpressionUUID->"ff9758f9-f1da-c64a-935b-3719fe4532d6"],
 
 Cell[BoxData[GridBox[{
@@ -151,7 +151,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"e8e8e5ef-c972-084b-be70-28738c9aff82"]}
+     ExpressionUUID->"e8e8e5ef-c972-084b-be70-28738c9aff82"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "faf53b67-2cef-4d5f-a7a5-56ead70659bc"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"cd55b2a1-a4ef-40a3-a583-e5bddf613e7a"]}
   }]], "3ColumnTableMod",
  CellID->986200209, ExpressionUUID->"8be1efc1-5bdd-c549-a34a-3997128dcce3"],
 
@@ -162,7 +166,46 @@ must all use the same number of symbols and the same ",
   "6c652e25-ef40-7d45-b26c-4fc98dcb7d5c"],
  " setting."
 }], "Notes",
- CellID->467709451, ExpressionUUID->"9c5b5b0e-3ef5-1945-b4e7-4360591ff699"]
+ CellID->467709451, ExpressionUUID->"9c5b5b0e-3ef5-1945-b4e7-4360591ff699"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"313735ea-6176-4b64-a17f-8e28a667a7a5"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"91e165b0-0ded-4de9-990c-2f5c9041509e"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100112, ExpressionUUID->"199cfb0c-96f1-488a-9de7-072cfe7a3ae8"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"1bb1a926-c220-4045-b437-61934b49b091"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100119, ExpressionUUID->"bb4607cf-ad2b-4df6-9894-6e8040098746"],
+
+Cell[TextData[{
+ "No other setting is implemented yet. ",
+ Cell[BoxData[
+  ButtonBox["DecodeCyclicTagToObliviousRingMachine",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/DecodeCyclicTagToObliviousRingMachine"]], 
+  "InlineFormula", ExpressionUUID->"23c3171b-6d7c-4eff-9132-4ec3dcd08492"],
+ " stays unevaluated when it is given any other value, rather than quietly \
+compiling something else."
+}], "Notes",
+ CellID->707100126, ExpressionUUID->"b77ccfb4-5df9-4400-8852-afc84ce9c49d"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -619,16 +662,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"DecodeCyclicTagToObliviousRingMachine", "[", 
-   RowBox[{"history", ",", " ", "orm", ",", " ", "4"}], "]"}], " ", "===", 
-  " ", 
-  RowBox[{"DecodeNaryCyclicTagToObliviousRingMachine", "[", 
-   RowBox[{
-    RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-     RowBox[{"history", ",", " ", "4"}], "]"}], ",", " ", "orm"}], 
-   "]"}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"DecodeCyclicTagToObliviousRingMachine", "[", RowBox[{"history", ",", "orm", ",", "4"}], "]"}], "===", RowBox[{"DecodeNaryCyclicTagToObliviousRingMachine", "[", RowBox[{RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{"history", ",", RowBox[{"ObliviousRingMachineToNaryCyclicTagRule", "[", RowBox[{"orm", ",", "4"}], "]"}]}], "]"}], ",", "orm"}], "]"}]}]], "Input",
  CellLabel->"In[3]:=",
  CellID->212329058, ExpressionUUID->"92f0da05-52c8-3043-9ac9-4059fd1a97b3"],
 

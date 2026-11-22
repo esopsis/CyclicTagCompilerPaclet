@@ -111,7 +111,7 @@ ObliviousRingMachineToCyclicTagRule"]], "InlineFormula", ExpressionUUID->
 }], "Notes",
  CellID->677562193, ExpressionUUID->"c403fde3-b0cf-6247-aa00-63bc96282e08"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->818480797, ExpressionUUID->"6e88e619-2a6c-544b-9189-80de6d71d007"],
 
 Cell[BoxData[GridBox[{
@@ -121,7 +121,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"16d676b6-0d31-fc4b-a2ed-34d863df75ee"]}
+     ExpressionUUID->"16d676b6-0d31-fc4b-a2ed-34d863df75ee"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "a46c88db-6812-489a-894a-f1a308411e32"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"22d41edd-c481-4f96-8eff-fd7af83c1981"]}
   }]], "3ColumnTableMod",
  CellID->558999138, ExpressionUUID->"33748950-4555-714e-9b0b-cb8f672a9f93"],
 
@@ -132,7 +136,46 @@ must all use the same number of symbols and the same ",
   "d61a997b-71ad-6243-ae95-303ec1897465"],
  " setting."
 }], "Notes",
- CellID->687894281, ExpressionUUID->"422fa2d2-3378-5444-b21b-e2e2ceaf5dcd"]
+ CellID->687894281, ExpressionUUID->"422fa2d2-3378-5444-b21b-e2e2ceaf5dcd"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"cd809d59-d952-49b1-9712-423c57bfb37a"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"aea56eab-a7e5-4051-8e7f-37f973433a0a"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100091, ExpressionUUID->"381fc1e2-dfee-4bad-bbb7-711c35f29347"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"d7f02a93-fae9-4146-a004-1a1519ce645c"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100098, ExpressionUUID->"87d501f2-5457-4865-a6c0-3730fb6fd7dd"],
+
+Cell[TextData[{
+ "No other setting is implemented yet. ",
+ Cell[BoxData[
+  ButtonBox["ObliviousRingMachineToCyclicTagInit",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/ObliviousRingMachineToCyclicTagInit"]], 
+  "InlineFormula", ExpressionUUID->"e9d780fe-ada0-43d4-8c8a-d50d359fecf7"],
+ " stays unevaluated when it is given any other value, rather than quietly \
+compiling something else."
+}], "Notes",
+ CellID->707100105, ExpressionUUID->"e8490e4a-133d-4a48-b1f5-9905706744da"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -367,12 +410,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->976712704, ExpressionUUID->"0f4032ee-6a5c-2c4d-803d-bdfa0ed1705b"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-  "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",",
-    "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", 
-   "0"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->807856415, ExpressionUUID->"fff48c46-4a7d-8a47-a81c-db896c0fe405"]
 }, Open  ]],
@@ -430,12 +468,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->902670340, ExpressionUUID->"6446c6a9-0ac8-bc4b-901e-95e99271ba83"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-  "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",",
-    "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0"}], 
-  "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->994912301, ExpressionUUID->"c96e61c5-e5ee-d34f-b7d7-91bdb690559c"]
 }, Open  ]],
@@ -542,23 +575,7 @@ The tape is encoded with two more symbols than the ring machine has:\
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"ObliviousRingMachineToCyclicTagInit", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", " ", "1", ",", " ", "1", ",", " ", "0"}], "}"}], ",", 
-    " ", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"x_", ",", " ", "y_"}], "}"}], " ", ":>", " ", 
-     RowBox[{"{", 
-      RowBox[{"y", ",", " ", "x"}], "}"}]}]}], "]"}], " ", "===", " ", 
-  RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"0", ",", " ", "1", ",", " ", "1", ",", " ", "0"}], "}"}], ",", 
-    " ", "4"}], "]"}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"ObliviousRingMachineToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"0", ",", "1", ",", "1", ",", "0"}], "}"}], ",", RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}]}], "]"}], "===", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"0", ",", "1", ",", "1", ",", "0"}], "}"}], ",", RowBox[{"ObliviousRingMachineToNaryCyclicTagRule", "[", RowBox[{RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], ",", "4"}], "]"}]}], "]"}]}]], "Input",
  CellLabel->"In[1]:=",
  CellID->602965035, ExpressionUUID->"ee1c90bf-f82d-ae4f-984d-99fd4eabd47c"],
 

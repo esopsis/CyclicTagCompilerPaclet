@@ -107,7 +107,7 @@ DecodeCyclicTagToNaryCyclicTag"]], "InlineFormula", ExpressionUUID->
 }], "Notes",
  CellID->754316963, ExpressionUUID->"4a62c88c-00f1-2e4f-a388-160ac186a37b"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->773791850, ExpressionUUID->"87e54d40-c912-7e44-96b7-328ef48f2ef9"],
 
 Cell[BoxData[GridBox[{
@@ -117,7 +117,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"32ff744d-b375-944b-9088-7fd909ce6c90"]}
+     ExpressionUUID->"32ff744d-b375-944b-9088-7fd909ce6c90"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "468f92d9-fc59-43ac-9ce8-f7cad9f211b0"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"1363368e-4226-492d-a120-0f30ad3d107f"]}
   }]], "3ColumnTableMod",
  CellID->519368861, ExpressionUUID->"74915fc9-6343-cc4e-b844-3906dd9e0cae"],
 
@@ -128,7 +132,46 @@ must all use the same number of symbols and the same ",
   "9ec34a8c-5ebd-9b48-909c-fcb4a921f76f"],
  " setting."
 }], "Notes",
- CellID->561698488, ExpressionUUID->"e1314f21-c972-0642-a64c-f6e4ab0d0491"]
+ CellID->561698488, ExpressionUUID->"e1314f21-c972-0642-a64c-f6e4ab0d0491"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"b6031f1b-8d5d-4107-b102-79cf55b84ff2"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"f63c467b-032a-4661-8d5b-87e95f1a82fc"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100049, ExpressionUUID->"554aadef-fb1b-424d-aaf0-480353df0d2e"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"e52e2739-c8b8-4161-89a4-491eda318241"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100056, ExpressionUUID->"3876561c-533e-4a44-a5d4-e4b0090fbefc"],
+
+Cell[TextData[{
+ "No other setting is implemented yet. ",
+ Cell[BoxData[
+  ButtonBox["DecodeCyclicTagToNaryCyclicTag",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/DecodeCyclicTagToNaryCyclicTag"]], 
+  "InlineFormula", ExpressionUUID->"e2847163-164d-4e36-abc5-837b6e5168b5"],
+ " stays unevaluated when it is given any other value, rather than quietly \
+compiling something else."
+}], "Notes",
+ CellID->707100063, ExpressionUUID->"7cb292f7-9761-4cb1-8c64-c91a6fce1600"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -330,24 +373,13 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->541161917, ExpressionUUID->"9423983a-481d-e649-afdd-0e15fc644027"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"history", " ", "=", " ", 
-   RowBox[{"CyclicTagSystem", "[", 
-    RowBox[{
-     RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-      RowBox[{"{", 
-       RowBox[{"1", ",", " ", "0"}], "}"}], "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-      RowBox[{"6", ",", " ", "2"}], "]"}]}], "]"}]}], ";"}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"history", "=", RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"6", ",", "rule"}], "]"}]}], "]"}]}], ";"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->624312267, ExpressionUUID->"0ff6abd2-7200-9348-ae8c-eaa4473a4356"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", "history", "]"}]], "Input",
+Cell[BoxData[RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{"history", ",", "rule"}], "]"}]], "Input",
  CellLabel->"In[3]:=",
  CellID->40426258, ExpressionUUID->"b4c624ef-aa2c-1547-8102-b12ffe87d870"],
 
@@ -429,20 +461,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-  RowBox[{
-   RowBox[{"CyclicTagSystem", "[", 
-    RowBox[{
-     RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"2", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ", "3"}], 
-      "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-      RowBox[{"5", ",", " ", "3"}], "]"}]}], "]"}], ",", " ", "3"}], 
-  "]"}]], "Input",
+Cell[BoxData[RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"5", ",", "rule"}], "]"}]}], "]"}], ",", "rule"}], "]"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->231451352, ExpressionUUID->"b2fcd136-a459-ee43-8052-ec7463d9c242"],
 
@@ -521,34 +540,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-  RowBox[{
-   RowBox[{"CyclicTagSystem", "[", 
-    RowBox[{
-     RowBox[{"NaryCyclicTagToCyclicTagRule", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"{", "1", "}"}], ",", " ", 
-           RowBox[{"{", 
-            RowBox[{"0", ",", " ", "0"}], "}"}]}], "}"}], ",", " ", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"{", "}"}], ",", " ", 
-           RowBox[{"{", 
-            RowBox[{"1", ",", " ", "1"}], "}"}]}], "}"}]}], "}"}], ",", " ", 
-       "opts"}], "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", " ", "0"}], "}"}], ",", " ", "2", ",", " ", 
-       "opts"}], "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-      RowBox[{"4", ",", " ", "2", ",", " ", "opts"}], "]"}]}], "]"}], ",", 
-   " ", "2", ",", " ", "opts"}], "]"}]], "Input",
+Cell[BoxData[RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "1", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", "opts"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "1", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", "opts"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"4", ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "1", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", "opts"}], "]"}]}], "]"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "1", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}], ",", "opts"}], "]"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->497682114, ExpressionUUID->"98e39bfe-564d-e24d-8041-ccbbacfd5591"],
 
@@ -624,26 +616,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-   RowBox[{
-    RowBox[{"CyclicTagSystem", "[", 
-     RowBox[{
-      RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-      RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"2", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ", "3"}], 
-       "]"}], ",", " ", 
-      RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-       RowBox[{"8", ",", " ", "3"}], "]"}]}], "]"}], ",", " ", "3"}], "]"}], 
-  " ", "===", " ", 
-  RowBox[{"NaryCyclicTag", "[", 
-   RowBox[{"rule", ",", " ", 
-    RowBox[{"{", 
-     RowBox[{"2", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ", "8"}], 
-   "]"}]}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"8", ",", "rule"}], "]"}]}], "]"}], ",", "rule"}], "]"}], "===", RowBox[{"NaryCyclicTag", "[", RowBox[{"rule", ",", RowBox[{"{", RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", "8"}], "]"}]}]], "Input",
  CellLabel->"In[2]:=",
  CellID->665437879, ExpressionUUID->"d7a1c4a0-bb98-5a4e-b243-4c1c8af66ddf"],
 
@@ -669,9 +642,8 @@ Cell[BoxData[
   $Line = 0; Null]], "ExampleSection",
  CellID->975334553, ExpressionUUID->"27912605-f857-8640-a1f5-17afa02500bd"],
 
-Cell["\<\
-Decoding with the wrong number of symbols gives a different evolution:\
-\>", "ExampleText",
+Cell["Decoding with a different rule gives a different evolution:", \
+"ExampleText",
  CellID->633385587, ExpressionUUID->"0c83bc9c-0227-df4f-bcd7-18169942d3c9"],
 
 Cell[BoxData[
@@ -694,69 +666,17 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->555455599, ExpressionUUID->"1811dc1c-af78-dd42-8250-1a7c035ccb75"],
 
-Cell[BoxData[
- RowBox[{
-  RowBox[{"history", " ", "=", " ", 
-   RowBox[{"CyclicTagSystem", "[", 
-    RowBox[{
-     RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"2", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ", "3"}], 
-      "]"}], ",", " ", 
-     RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-      RowBox[{"2", ",", " ", "3"}], "]"}]}], "]"}]}], ";"}]], "Input",
+Cell[BoxData[RowBox[{RowBox[{"history", "=", RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"2", ",", "rule"}], "]"}]}], "]"}]}], ";"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->6626087, ExpressionUUID->"03c1ac90-a61d-7246-9fdf-1377d1f40929"],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-    RowBox[{"history", ",", " ", "3"}], "]"}], ",", " ", 
-   RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", 
-    RowBox[{"history", ",", " ", "2"}], "]"}]}], "}"}]], "Input",
+Cell[BoxData[RowBox[{"{", RowBox[{RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{"history", ",", "rule"}], "]"}], ",", RowBox[{"DecodeCyclicTagToNaryCyclicTag", "[", RowBox[{"history", ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "1", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}], "}"}]}], "]"}]}], "}"}]], "Input",
  CellLabel->"In[3]:=",
  CellID->514757102, ExpressionUUID->"2d119131-f691-774c-bc08-e0933f129601"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "0", ",", 
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", 
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "1", ",", 
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "0", ",", "1"}], 
-      "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", 
-       RowBox[{
-        RowBox[{"-", "1"}], "+", "\<\"NotFound\"\>"}], ",", "0", ",", "1"}], 
-      "}"}]}], "}"}]}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"2", ",", "0", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"2", ",", "0", ",", "2", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "2", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"2", ",", "1", ",", "2", ",", "0", ",", "1"}], "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "2", ",", "0", ",", "1"}], "}"}]}], "}"}]}], "}"}]], "Output",
  CellLabel->"Out[3]=",
  CellID->376776088, ExpressionUUID->"0d5dcb81-5867-6849-9721-e8bdf4f404c0"]
 }, Open  ]],

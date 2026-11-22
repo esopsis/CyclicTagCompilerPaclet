@@ -75,7 +75,8 @@ functionToReplacement[r : _Rule | _RuleDelayed] := {r}
 ormRuleNormalizePart[rule_List] :=
 	Replace[
 		Replace[rule, {x : Except[{_, _Integer}] :> {x, 1}}],
-		{rulePart_, offset_} :> {functionToReplacement[rulePart], offset}]
+		{rulePart_, offset_} :> 
+			{functionToReplacement[rulePart], offset}]
 
 
 (* Every accepted rule form becomes a list of steps {rules, offset}. *)
@@ -156,7 +157,10 @@ ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :
 				skips[states, replacementSize, tapeLength],
 				selectors[rule, states],
 				skips[states, replacementSize, tapeLength, offset]]] /;
-	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
+	If[Negative[offset], 
+		Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; 
+		False, 
+		True]
 
 
 (* The number of tape symbols: one more than the largest symbol the rules mention explicitly, and at least tapeStates.
@@ -166,7 +170,8 @@ maxStates[rules_List, tapeStates_Integer] :=
 	Max[
 		Cases[
 			rules /.
-				(h : Rule | RuleDelayed)[lhs_, rhs_] /; ! MatchQ[Unevaluated[rhs], _Integer | {___Integer}] :>
+				(h : Rule | RuleDelayed)[lhs_, rhs_] /; 
+						! MatchQ[Unevaluated[rhs], _Integer | {___Integer}] :>
 					h[lhs, {}],
 			_Integer,
 			Infinity] + 1,
@@ -180,7 +185,8 @@ ormToNCTStep[tapeLength_Integer, states_Integer][{rule_?ruleQ /; AllSameBy[Keys[
 ObliviousRingMachineToNaryCyclicTagRule[rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer : 2] :=
 	With[{modified = ormRuleNormalize[rule]},
 		Catenate[
-			ormToNCTStep[tapeLength, maxStates[First /@ modified, tapeStates]] /@ modified]]
+			ormToNCTStep[tapeLength, maxStates[First /@ modified, tapeStates]] /@ 
+				modified]]
 
 
 End[];

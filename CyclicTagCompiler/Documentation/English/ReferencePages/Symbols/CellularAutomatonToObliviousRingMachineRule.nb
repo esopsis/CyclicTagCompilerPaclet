@@ -896,36 +896,7 @@ Cell[BoxData[
  CellLabel->"In[2]:=",
  CellID->87746075, ExpressionUUID->"d19d69d0-d21b-5549-ac2b-062f7f1d205c"],
 
-Cell[BoxData[
- TagBox[
-  RowBox[{"{", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", 
-    RowBox[{"\[LeftSkeleton]", "2", "\[RightSkeleton]"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "1", ",", "1"}], "}"}], "\[Rule]", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "1", ",", "1"}], "}"}]}], ",", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"1", ",", "1", ",", "0"}], "}"}], "\[Rule]", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], ",", 
-      RowBox[{"\[LeftSkeleton]", "5", "\[RightSkeleton]"}], ",", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0"}], "}"}], "\[Rule]", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0"}], "}"}]}]}], "}"}]}], "}"}],
-  Short]], "Output",
+Cell[BoxData[TagBox[RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", RowBox[{"{", RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", RowBox[{"\[LeftSkeleton]", "2", "\[RightSkeleton]"}], ",", RowBox[{"{", RowBox[{"\[LeftSkeleton]", "1", "\[RightSkeleton]"}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "1"}], "}"}], "\[Rule]", RowBox[{"{", RowBox[{"0", ",", "1", ",", "1"}], "}"}]}], ",", RowBox[{RowBox[{"{", RowBox[{"1", ",", "1", ",", "0"}], "}"}], "\[Rule]", RowBox[{"{", RowBox[{"0", ",", "1", ",", "0"}], "}"}]}], ",", RowBox[{"\[LeftSkeleton]", "5", "\[RightSkeleton]"}], ",", RowBox[{RowBox[{"{", RowBox[{"0", ",", "0", ",", "0"}], "}"}], "\[Rule]", RowBox[{"{", RowBox[{"0", ",", "0", ",", "0"}], "}"}]}]}], "}"}]}], "}"}], Short]], "Output",
  CellLabel->"Out[2]=",
  CellID->106651794, ExpressionUUID->"b271965d-2e3c-5b4e-baaf-1841f082fb3f"]
 }, Open  ]],

@@ -83,7 +83,7 @@ NaryCyclicTagToCyclicTagSteps"], "[",
 }], "Notes",
  CellID->454674479, ExpressionUUID->"fc1cf902-eed5-ba41-b158-8e74b326a49d"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->865060223, ExpressionUUID->"197528d9-3b59-c842-83be-b081cbdff4a6"],
 
 Cell[BoxData[GridBox[{
@@ -93,7 +93,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"b26cf20d-2f6e-404b-a98e-116ade388a79"]}
+     ExpressionUUID->"b26cf20d-2f6e-404b-a98e-116ade388a79"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "c184a782-31f7-42fd-bab4-750fccb23bff"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"bc17a223-82ae-499b-bcbe-f5c0605e4edf"]}
   }]], "3ColumnTableMod",
  CellID->411602785, ExpressionUUID->"b6bff131-0295-e04e-9da7-2d3cf39ce869"],
 
@@ -118,7 +122,47 @@ The default ",
   "40045768-b84a-7242-b449-9a4ff1d74786"],
  " uses as few cells as possible."
 }], "Notes",
- CellID->74043799, ExpressionUUID->"274feb80-d4ab-7741-88f1-5396681b1a84"]
+ CellID->74043799, ExpressionUUID->"274feb80-d4ab-7741-88f1-5396681b1a84"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"1a320e46-6ac3-4601-9828-32efac50d87f"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"a6f891ea-a6a3-45df-b1ce-def0ad53abd2"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100259, ExpressionUUID->"10321141-b97e-4d50-bed1-639ba30ae1ff"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"3db6d161-c545-447c-9281-504c74f25127"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100266, ExpressionUUID->"1f89c837-e3d3-4395-9b87-e61234ecb136"],
+
+Cell[TextData[{
+ "The step count already accounts for the symbols that are left out, so it \
+is smaller than the number of symbols alone would suggest. The setting \
+itself is not checked: unlike the rule, initial condition and decoding, ",
+ Cell[BoxData[
+  ButtonBox["NaryCyclicTagToCyclicTagSteps",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/NaryCyclicTagToCyclicTagSteps"]], 
+  "InlineFormula", ExpressionUUID->"2c4a3edc-8104-47bb-aea2-26776b53a9b5"],
+ " still evaluates when it is given a setting that is not implemented."
+}], "Notes",
+ CellID->707100273, ExpressionUUID->"4db95d70-1b34-4794-80bd-404ceb2741d9"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -295,9 +339,7 @@ The number of cyclic tag steps for 10 steps of a 3-symbol system:\
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-  RowBox[{"10", ",", " ", "3"}], "]"}]], "Input",
+Cell[BoxData[RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"10", ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "2", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "1"}], "}"}], ",", RowBox[{"{", "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}], ",", RowBox[{"{", "2", "}"}], ",", RowBox[{"{", "0", "}"}]}], "}"}]}], "}"}]}], "]"}]], "Input",
  CellLabel->"In[1]:=",
  CellID->437878181, ExpressionUUID->"9e5382ea-e075-d644-94e8-8ed11d8e5473"],
 
@@ -376,11 +418,7 @@ Cell[TextData[{
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-  RowBox[{"10", ",", " ", "3", ",", " ", 
-   RowBox[{"\"\<TargetSystem\>\"", " ", "->", " ", "\"\<Rule110\>\""}]}], 
-  "]"}]], "Input",
+Cell[BoxData[RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"10", ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", "2", "}"}], ",", RowBox[{"{", RowBox[{"0", ",", "1"}], "}"}], ",", RowBox[{"{", "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}], ",", RowBox[{"{", "2", "}"}], ",", RowBox[{"{", "0", "}"}]}], "}"}]}], "}"}], ",", RowBox[{"\"TargetSystem\"", "\[Rule]", "\"Rule110\""}]}], "]"}]], "Input",
  CellLabel->"In[1]:=",
  CellID->612027437, ExpressionUUID->"06096744-9226-f042-9d41-98825e0a1351"],
 
@@ -445,16 +483,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"Last", "[", 
-  RowBox[{"CyclicTagSystem", "[", 
-   RowBox[{
-    RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", " ", 
-    RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", " ", "0"}], "}"}], "]"}], ",", " ", 
-    RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", 
-     RowBox[{"5", ",", " ", "2"}], "]"}]}], "]"}], "]"}]], "Input",
+Cell[BoxData[RowBox[{"Last", "[", RowBox[{"CyclicTagSystem", "[", RowBox[{RowBox[{"NaryCyclicTagToCyclicTagRule", "[", "rule", "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", "rule"}], "]"}], ",", RowBox[{"NaryCyclicTagToCyclicTagSteps", "[", RowBox[{"5", ",", "rule"}], "]"}]}], "]"}], "]"}]], "Input",
  CellLabel->"In[2]:=",
  CellID->163279303, ExpressionUUID->"fce13652-8905-c743-9f85-a83afa50bd71"],
 
@@ -467,14 +496,7 @@ Cell[BoxData[
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"NaryCyclicTagToCyclicTagInit", "[", 
-  RowBox[{"Last", "[", 
-   RowBox[{"NaryCyclicTag", "[", 
-    RowBox[{"rule", ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"1", ",", " ", "0"}], "}"}], ",", " ", "5"}], "]"}], "]"}], 
-  "]"}]], "Input",
+Cell[BoxData[RowBox[{"NaryCyclicTagToCyclicTagInit", "[", RowBox[{RowBox[{"Last", "[", RowBox[{"NaryCyclicTag", "[", RowBox[{"rule", ",", RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], ",", "5"}], "]"}], "]"}], ",", "rule"}], "]"}]], "Input",
  CellLabel->"In[3]:=",
  CellID->978757181, ExpressionUUID->"7081c635-1015-b348-8c6b-590e2befc708"],
 

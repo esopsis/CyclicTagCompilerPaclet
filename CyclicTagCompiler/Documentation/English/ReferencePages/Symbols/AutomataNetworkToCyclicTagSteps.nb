@@ -72,7 +72,7 @@ AutomataNetworkToCyclicTagSteps"], "[",
 }], "Usage",
  CellID->963065960, ExpressionUUID->"7ddba915-c434-3541-b75e-9edf75111fdc"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->472688417, ExpressionUUID->"4e1561e9-16c8-814c-9350-bf782c774013"],
 
 Cell[BoxData[GridBox[{
@@ -82,7 +82,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"78696cb3-0a3e-b04e-b13c-1a5cd59e412c"]}
+     ExpressionUUID->"78696cb3-0a3e-b04e-b13c-1a5cd59e412c"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "d25605cb-0288-4c78-9174-0d8b653c6a6a"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"e209b17a-9318-4a3b-ad46-38dbc7cb4a31"]}
   }]], "3ColumnTableMod",
  CellID->849526839, ExpressionUUID->"55415e68-8665-a448-b31d-1e07b011beb4"],
 
@@ -93,7 +97,47 @@ Cell[TextData[{
   "8f808c42-9b94-dc49-a64a-dd6792b09124"],
  " and option settings as for the rule, initial condition and decoding."
 }], "Notes",
- CellID->588201136, ExpressionUUID->"3e2dc5f1-626d-f946-962c-1662ee3e974c"]
+ CellID->588201136, ExpressionUUID->"3e2dc5f1-626d-f946-962c-1662ee3e974c"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"c7865c7a-48c4-4e42-85b1-4a73da46f036"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"e49ad67f-01fc-49e2-85df-8973f7795165"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100322, ExpressionUUID->"2eee75bf-602e-4c3a-b239-697a6e257240"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"9abcf02e-38fa-420f-ad92-80ba0eed7ca9"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100329, ExpressionUUID->"28f0b90e-f5ef-42ff-a2a6-77f184b988a5"],
+
+Cell[TextData[{
+ "The step count already accounts for the symbols that are left out, so it \
+is smaller than the number of symbols alone would suggest. The setting \
+itself is not checked: unlike the rule, initial condition and decoding, ",
+ Cell[BoxData[
+  ButtonBox["AutomataNetworkToCyclicTagSteps",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/AutomataNetworkToCyclicTagSteps"]], 
+  "InlineFormula", ExpressionUUID->"5ecb6ec0-22e3-47e8-92b4-d7f61d86a40e"],
+ " still evaluates when it is given a setting that is not implemented."
+}], "Notes",
+ CellID->707100336, ExpressionUUID->"a2584c1b-3f24-4b6b-8980-757ee12e08c2"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -366,7 +410,7 @@ Cell[BoxData[
  CellLabel->"In[2]:=",
  CellID->850617387, ExpressionUUID->"981bf549-844e-8949-bbfa-8afd0547159f"],
 
-Cell[BoxData["5120"], "Output",
+Cell[BoxData["3840"], "Output",
  CellLabel->"Out[2]=",
  CellID->186131768, ExpressionUUID->"7ccd3ff3-a157-db4c-8504-035d55b41d79"]
 }, Open  ]],

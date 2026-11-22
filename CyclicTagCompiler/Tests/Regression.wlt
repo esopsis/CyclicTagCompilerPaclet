@@ -1,8 +1,14 @@
 (* Regression tests: the expected values of decoded evolutions were computed by the original CyclicTagCompiler
    packages that this paclet was made from, using CyclicTagCompilerDev/regression/captureGolden.wls.
-   The expected compiled rules and step counts were recomputed for the smaller encoding of the digit delays in
-   the oblivious ring machine to n-ary cyclic tag compilation.
-   Large values are compared by the SHA-256 hash of their InputForm. *)
+   The expected compiled rules, initial conditions and step counts were recomputed twice since: first for the
+   smaller encoding of the digit delays in the oblivious ring machine to n-ary cyclic tag compilation, and then
+   for "Optimization" -> "DeletedSymbolsHighest", which drops the symbol columns that every n-ary rule part
+   leaves empty. The decoded evolutions of oblivious ring machines, cellular automata and automata networks are
+   unchanged by that optimization: it only narrows the cyclic tag encoding those compilations pass through.
+   Large values are compared by the SHA-256 hash of their InputForm.
+
+   The construction is described in "A Simpler Polynomial-Time Compilation to Cyclic Tag for Bounded
+   Computation", https://community.wolfram.com/t/a-simpler-polynomial-time-compilation-to-cyclic-tag-for-bounded-computation *)
 
 VerificationTest[
 	Needs["EricJamesParfitt`CyclicTagCompiler`"],
@@ -20,14 +26,15 @@ VerificationTest[
 ]
 
 VerificationTest[
-	NaryCyclicTagToCyclicTagRule[{{{1}, {0, 0}}, {{}, {1, 1}}, {{0, 1}, {}}}, 3],
-	{{0, 1, 0}, {1, 0, 0, 1, 0, 0}, {}, {}, {0, 1, 0, 0, 1, 0}, {}, {1, 0, 0, 0, 1, 0}, {}, {}},
+	NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}],
+	{{0, 0, 1}, {1, 0, 0, 0, 1, 0}, {}, {0, 1, 0, 0, 1, 0}, {0, 0, 1}, {1, 0, 0}},
 	TestID -> "Regression-NCT-Rule-2"
 ]
 
+(* Symbol 1 is empty in every rule part, so its column is dropped and the blocks are 2 cells wide, not 3. *)
 VerificationTest[
-	NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}],
-	{{0, 0, 1}, {1, 0, 0, 0, 1, 0}, {}, {0, 1, 0, 0, 1, 0}, {0, 0, 1}, {1, 0, 0}},
+	NaryCyclicTagToCyclicTagRule[{{{1}, {}, {0}}, {{0, 1}, {}, {}}}],
+	{{0, 0}, {1, 0}, {1, 0, 0, 0}, {}},
 	TestID -> "Regression-NCT-Rule-3"
 ]
 
@@ -38,45 +45,80 @@ VerificationTest[
 ]
 
 VerificationTest[
-	NaryCyclicTagToCyclicTagInit[{0, 1, 1}, 2],
+	NaryCyclicTagToCyclicTagRule[{{{1}, {}, {0}}, {{0, 1}, {}, {}}}, "TargetSystem" -> "Rule110"],
+	{{0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {}, {}, {}, {}, {}},
+	TestID -> "Regression-NCT-Rule-5"
+]
+
+(* Every column is dropped, so the rule becomes the single empty appendant. *)
+VerificationTest[
+	{NaryCyclicTagToCyclicTagRule[{{{}, {}}}], NaryCyclicTagToCyclicTagRule[{}]},
+	{{{}}, {{}}},
+	TestID -> "Regression-NCT-Rule-6"
+]
+
+VerificationTest[
+	NaryCyclicTagToCyclicTagInit[{0, 1, 1}, {{{1}, {0, 0}}, {{}, {1, 1}}, {{0, 1}, {}}}],
 	{1, 0, 0, 1, 0, 1},
 	TestID -> "Regression-NCT-Init-1"
 ]
 
 VerificationTest[
-	NaryCyclicTagToCyclicTagInit[{2, 0, 1}, 3],
+	NaryCyclicTagToCyclicTagInit[{2, 0, 1}, {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}],
 	{0, 0, 1, 1, 0, 0, 0, 1, 0},
 	TestID -> "Regression-NCT-Init-2"
 ]
 
 VerificationTest[
-	NaryCyclicTagToCyclicTagInit[{0, 1}, 2, "TargetSystem" -> "Rule110"],
+	NaryCyclicTagToCyclicTagInit[{0, 1}, {{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"],
 	{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
 	TestID -> "Regression-NCT-Init-3"
 ]
 
+(* The dropped symbol 1 encodes as an all-zero block, and 2 takes over its place in the encoding. *)
 VerificationTest[
-	NaryCyclicTagToCyclicTagSteps[7, 3],
+	NaryCyclicTagToCyclicTagInit[{0, 1, 2}, {{{1}, {}, {0}}, {{0, 1}, {}, {}}}],
+	{1, 0, 0, 0, 0, 1},
+	TestID -> "Regression-NCT-Init-4"
+]
+
+VerificationTest[
+	NaryCyclicTagToCyclicTagSteps[7, {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}],
 	21,
 	TestID -> "Regression-NCT-Steps-1"
 ]
 
 VerificationTest[
-	NaryCyclicTagToCyclicTagSteps[7, 3, "TargetSystem" -> "Rule110"],
+	NaryCyclicTagToCyclicTagSteps[7, {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}, "TargetSystem" -> "Rule110"],
 	42,
 	TestID -> "Regression-NCT-Steps-2"
 ]
 
+(* Dropping symbol 1 makes each step cost 2 cyclic tag steps instead of 3. *)
 VerificationTest[
-	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}], NaryCyclicTagToCyclicTagInit[{2, 0, 1}, 3], NaryCyclicTagToCyclicTagSteps[6, 3]], 3],
+	NaryCyclicTagToCyclicTagSteps[7, {{{1}, {}, {0}}, {{0, 1}, {}, {}}}],
+	14,
+	TestID -> "Regression-NCT-Steps-3"
+]
+
+VerificationTest[
+	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}], NaryCyclicTagToCyclicTagInit[{2, 0, 1}, {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}], NaryCyclicTagToCyclicTagSteps[6, {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}]], {{{2}, {0, 1}, {}}, {{1, 1}, {2}, {0}}}],
 	{{2, 0, 1}, {0, 1}, {1, 1, 1}, {1, 1, 0, 1}, {1, 0, 1, 2}, {0, 1, 2, 0, 1}, {1, 2, 0, 1, 1, 1}},
 	TestID -> "Regression-NCT-Decode-1"
 ]
 
 VerificationTest[
-	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagInit[{0, 1}, 2, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagSteps[5, 2, "TargetSystem" -> "Rule110"]], 2, "TargetSystem" -> "Rule110"],
+	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagInit[{0, 1}, {{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"], NaryCyclicTagToCyclicTagSteps[5, {{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"]], {{{1}, {0, 0}}, {{}, {1, 1}}}, "TargetSystem" -> "Rule110"],
 	{{0, 1}, {1, 1}, {1, 1, 1}, {1, 1, 0, 0}, {1, 0, 0, 1, 1}, {0, 0, 1, 1, 0, 0}},
 	TestID -> "Regression-NCT-Decode-2"
+]
+
+(* With symbol 1 dropped the decoded evolution is the n-ary one relabeled: the survivors 0 and 2 keep their
+   numbers and the dropped symbol 1 comes back as 2 as well. *)
+VerificationTest[
+	DecodeCyclicTagToNaryCyclicTag[CyclicTagSystem[NaryCyclicTagToCyclicTagRule[{{{1}, {}, {0}}, {{0, 1}, {}, {}}}], NaryCyclicTagToCyclicTagInit[{0, 1, 2}, {{{1}, {}, {0}}, {{0, 1}, {}, {}}}], NaryCyclicTagToCyclicTagSteps[6, {{{1}, {}, {0}}, {{0, 1}, {}, {}}}]], {{{1}, {}, {0}}, {{0, 1}, {}, {}}}],
+	{{0, 2, 1}, {2, 1, 2}, {1, 2}, {2, 0}, {0}, {2}, {}},
+	TestID -> "Regression-NCT-Decode-3"
 ]
 
 VerificationTest[
@@ -123,37 +165,37 @@ VerificationTest[
 
 VerificationTest[
 	ObliviousRingMachineToCyclicTagRule[{{{0, 1} -> {1, 0}, {1, 1} -> {0, 0}}, 2}, 5],
-	{{}, {0, 0, 0, 1}, {}, {}, {0, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {1, 0, 0, 0, 1, 0, 0, 0}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}, {1, 0, 0, 0}, {0, 1, 0, 0}, {}, {}},
+	{{}, {0, 0, 0}, {}, {0, 0, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 1}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {0, 0, 0, 0, 1, 0, 1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 0, 0, 1, 0, 0}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}, {1, 0, 0}, {0, 1, 0}, {}},
 	TestID -> "Regression-ORM-Rule-1"
 ]
 
 VerificationTest[
 	ObliviousRingMachineToCyclicTagRule[{x_, y_} :> {y, x}, 4, 2, "TargetSystem" -> "Rule110"],
-	{{}, {0, 0, 0, 1, 0, 0}, {}, {}, {}, {}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}},
+	{{}, {0, 0, 0, 0, 0, 0}, {}, {}, {}, {}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}},
 	TestID -> "Regression-ORM-Rule-2"
 ]
 
 VerificationTest[
 	regressionHash[ObliviousRingMachineToCyclicTagRule[{{Reverse, {}, 3}, 2}, 5, 3]],
-	"8f1239d6f6e09cb22860e89d59748b3a3e4b9024542b051e2d81ef0adecf519e",
+	"4c73b0cfbebe470ba68421a45c187d73ef16d2c61cd2e8d6eed040c6b4b57b7b",
 	TestID -> "Regression-ORM-Rule-3"
 ]
 
 VerificationTest[
 	ObliviousRingMachineToCyclicTagInit[{0, 1, 1, 0}, {x_, y_} :> {y, x}],
-	{1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
+	{1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0},
 	TestID -> "Regression-ORM-Init-1"
 ]
 
 VerificationTest[
 	ObliviousRingMachineToCyclicTagInit[{0, 2, 1, 1, 0}, {{Reverse, {}, 3}, 2}, 3],
-	{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+	{1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
 	TestID -> "Regression-ORM-Init-2"
 ]
 
 VerificationTest[
 	ObliviousRingMachineToCyclicTagSteps[6, {{Reverse, {}, 3}, 2}, 5, 3],
-	1080,
+	864,
 	TestID -> "Regression-ORM-Steps-1"
 ]
 
@@ -207,49 +249,49 @@ VerificationTest[
 
 VerificationTest[
 	regressionHash[CellularAutomatonToCyclicTagRule[30, 5]],
-	"0d26a6c93d3faf0e6e4a4e94656d14956bfe11cc7da61cb98b4df076668db37d",
+	"cebf6de44a52528cb2669f166ce34a4743ff27ca776f516ec8bc388811ab4a49",
 	TestID -> "Regression-CA-Rule-1"
 ]
 
 VerificationTest[
 	regressionHash[CellularAutomatonToCyclicTagRule[110, 4, 2, "InfiniteSteps" -> True]],
-	"6b49b5d8883cef4fad255943e40b5464cdd863ade1e8a88dafb2abd5ac39ecdc",
+	"0cea6c9e875e1ff0fc48edcec5ed39041157408696cafa60d59ebb611e905ba2",
 	TestID -> "Regression-CA-Rule-2"
 ]
 
 VerificationTest[
 	regressionHash[CellularAutomatonToCyclicTagRule[{2007, 3, 1}, 4]],
-	"920e566292e9af9df09c6d48c07ee0b2adffe6be7e6cf2857611f5109e10cae6",
+	"6c9891577b4f889fe095981dfaf26c139a4429ce82f015cda15f3228f3b8400a",
 	TestID -> "Regression-CA-Rule-3"
 ]
 
 VerificationTest[
 	CellularAutomatonToCyclicTagRule[{6, 2, 1/2}, 4, 2, "TargetSystem" -> "Rule110"],
-	{{}, {0, 0, 0, 1, 0, 0}, {}, {}, {}, {}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}},
+	{{}, {0, 0, 0, 0, 0, 0}, {}, {}, {}, {}, {0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}, {1, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {}, {}, {}, {}},
 	TestID -> "Regression-CA-Rule-4"
 ]
 
 VerificationTest[
 	CellularAutomatonToCyclicTagInit[{0, 1, 1, 0, 1}],
-	{1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0},
+	{1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0},
 	TestID -> "Regression-CA-Init-1"
 ]
 
 VerificationTest[
 	CellularAutomatonToCyclicTagInit[{0, 2, 1, 0}, 3, 1, "InfiniteSteps" -> True],
-	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+	{1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0},
 	TestID -> "Regression-CA-Init-2"
 ]
 
 VerificationTest[
 	CellularAutomatonToCyclicTagSteps[3, 5],
-	960,
+	720,
 	TestID -> "Regression-CA-Steps-1"
 ]
 
 VerificationTest[
 	CellularAutomatonToCyclicTagSteps[3, 5, 2, 1/2, "InfiniteSteps" -> True],
-	1080,
+	810,
 	TestID -> "Regression-CA-Steps-2"
 ]
 
@@ -285,25 +327,25 @@ VerificationTest[
 
 VerificationTest[
 	regressionHash[AutomataNetworkToCyclicTagRule[{{{{0, 0} -> 0, {0, 1} -> 1, {1, 0} -> 1, {1, 1} -> 0}, {2, 3}, 1}, {{{0} -> 1, {1} -> 0}, {1}, 2}, {{{0, 0} -> 1, {0, 1} -> 0, {1, 0} -> 0, {1, 1} -> 1}, {1, 1}, 3}}]],
-	"fc8f27690c537881c779bfacada8318fbece433d1654cc68afee035b1033ab50",
+	"85f409379b0f661298cc5c9725934b7816d198935d4dc7876cbc8090baba126c",
 	TestID -> "Regression-AN-Rule-1"
 ]
 
 VerificationTest[
 	regressionHash[AutomataNetworkToCyclicTagRule[{{{{0, 0} -> 0, {0, 1} -> 1, {1, 0} -> 1, {1, 1} -> 0}, {2, 3}, 1}, {{{0} -> 1, {1} -> 0}, {1}, 2}, {{{0, 0} -> 1, {0, 1} -> 0, {1, 0} -> 0, {1, 1} -> 1}, {1, 1}, 3}}, 2, "TargetSystem" -> "Rule110"]],
-	"753fdf0be963d325f0a020f8f77b3448e3dfc0857d575cd2bf2d5a6a51793970",
+	"c19a03b0a428e16276ffe1cb053e3cf5ce7b2d0025cc6376a8c091a81db790db",
 	TestID -> "Regression-AN-Rule-2"
 ]
 
 VerificationTest[
 	AutomataNetworkToCyclicTagInit[{1, 0, 1}, {{{{0, 0} -> 0, {0, 1} -> 1, {1, 0} -> 1, {1, 1} -> 0}, {2, 3}, 1}, {{{0} -> 1, {1} -> 0}, {1}, 2}, {{{0, 0} -> 1, {0, 1} -> 0, {1, 0} -> 0, {1, 1} -> 1}, {1, 1}, 3}}],
-	{0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0},
+	{0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0},
 	TestID -> "Regression-AN-Init-1"
 ]
 
 VerificationTest[
 	AutomataNetworkToCyclicTagSteps[2, {{{{0, 0} -> 0, {0, 1} -> 1, {1, 0} -> 1, {1, 1} -> 0}, {2, 3}, 1}, {{{0} -> 1, {1} -> 0}, {1}, 2}, {{{0, 0} -> 1, {0, 1} -> 0, {1, 0} -> 0, {1, 1} -> 1}, {1, 1}, 3}}],
-	2576,
+	1932,
 	TestID -> "Regression-AN-Steps-1"
 ]
 

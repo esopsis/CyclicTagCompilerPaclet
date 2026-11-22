@@ -134,7 +134,11 @@ whether to emulate the cyclic cellular automaton for any number of steps\
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"88a81ea8-aee6-5c43-aeb6-2e8ec1d0a0a5"]}
+     ExpressionUUID->"88a81ea8-aee6-5c43-aeb6-2e8ec1d0a0a5"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "6c951716-a6b7-4a7d-9013-6df38ed34f35"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"e00a7f50-1e15-48e1-b8de-bde2963af48b"]}
   }]], "3ColumnTableMod",
  CellID->220544316, ExpressionUUID->"434773fc-2256-5f4b-bec8-9a8eaeca44fe"],
 
@@ -149,7 +153,47 @@ Cell[TextData[{
   "6d2e91c6-45b3-5e4c-a8e8-c96fd5dc4b3f"],
  " and option settings as for the rule, initial condition and decoding."
 }], "Notes",
- CellID->469041455, ExpressionUUID->"d9f43c16-3f84-b74f-8d61-a004ad473b01"]
+ CellID->469041455, ExpressionUUID->"d9f43c16-3f84-b74f-8d61-a004ad473b01"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"ac1a471a-723a-4cd2-a223-b23cbaad53ee"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"9a81ad52-0be4-4fcc-b5e2-026ca9433691"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100301, ExpressionUUID->"c9ccc434-0c57-42c9-b839-8da9c1ea6cdd"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"ebaddae5-be5b-451b-a42e-5db08376eb8d"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100308, ExpressionUUID->"60398bde-44c3-45ad-a685-cf8ae5b41083"],
+
+Cell[TextData[{
+ "The step count already accounts for the symbols that are left out, so it \
+is smaller than the number of symbols alone would suggest. The setting \
+itself is not checked: unlike the rule, initial condition and decoding, ",
+ Cell[BoxData[
+  ButtonBox["CellularAutomatonToCyclicTagSteps",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/CellularAutomatonToCyclicTagSteps"]], 
+  "InlineFormula", ExpressionUUID->"924d68d5-0510-41ea-8e9d-2134353d7c15"],
+ " still evaluates when it is given a setting that is not implemented."
+}], "Notes",
+ CellID->707100315, ExpressionUUID->"5efeafc7-38a7-4e6d-b1d8-35858e49219c"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -384,7 +428,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->840291856, ExpressionUUID->"5adef2e2-01e6-ce41-8fba-e26246e82bc3"],
 
-Cell[BoxData["1680"], "Output",
+Cell[BoxData["1260"], "Output",
  CellLabel->"Out[1]=",
  CellID->880586246, ExpressionUUID->"3a28788a-6805-d345-9129-1321b69300a1"]
 }, Open  ]],
@@ -443,9 +487,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->704046333, ExpressionUUID->"2d0c6494-9c87-3441-9803-ee6bd6ace375"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"560", ",", "1365", ",", "1176"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"420", ",", "1092", ",", "882"}], "}"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->195545954, ExpressionUUID->"7f7e7f6e-1937-f04d-bc13-85aecdeac69d"]
 }, Open  ]],
@@ -506,7 +548,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->213904404,ExpressionUUID->"7b86a028-e20e-a842-b4a5-0b75aa74720c"],
 
-Cell[BoxData["2592"], "Output",
+Cell[BoxData["1944"], "Output",
  CellLabel->"Out[1]=",
  CellID->398434043, ExpressionUUID->"5b044cae-7e17-914f-8229-13afa51ed599"]
 }, Open  ]],

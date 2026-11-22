@@ -1563,31 +1563,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",
  CellID->298204940, ExpressionUUID->"f56a5cb5-c83f-4647-a391-0884d7a64d26"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", 
-       RowBox[{"{", 
-        RowBox[{"y", ",", "x"}], "}"}]}], "}"}], ",", "2"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"Reverse", ",", 
-     RowBox[{"{", "}"}], ",", "3"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", 
-       RowBox[{"{", 
-        RowBox[{"y", ",", "x"}], "}"}]}], "}"}], ",", "2"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"Reverse", ",", 
-     RowBox[{"{", "}"}], ",", "3"}], "}"}]}], "}"}]], "Output",
+Cell[BoxData[RowBox[{InterpretationBox[TagBox[TagBox[DynamicModuleBox[{Typeset`open = False}, FrameBox[PaneSelectorBox[{False -> GridBox[{{PaneBox[GridBox[{{AdjustmentBox[StyleBox[StyleBox[StyleBox["\"[\[FilledSmallSquare]]\"", FontColor -> RGBColor[0.8745098039215686, 0.2784313725490196, 0.03137254901960784]], "ResourceFunctionIcon"], FontFamily -> "Source Sans Pro Black", FontWeight -> "Heavy", PrivateFontOptions -> {"OperatorSubstitution" -> False}, FontSize -> 0.6538461538461539*Inherited, ShowStringCharacters -> False], BoxBaselineShift -> -0.25, BoxMargins -> {{0, 0}, {-1, -1}}], StyleBox[RowBox[{StyleBox["ObliviousRingMachine", "ResourceFunctionLabel"], " "}], FontColor -> GrayLevel[0.09999084492227013], FontSize -> (12*Inherited)/13, ShowStringCharacters -> False, ShowAutoStyles -> False]}}, GridBoxSpacings -> {"Columns" -> {{0.25}}}], Alignment -> Left, FrameMargins -> {{3, 0}, {0, 0}}, BaselinePosition -> Baseline, BaseStyle -> {LineSpacing -> {0, 0}, LineBreakWithin -> False}], ItemBox[PaneBox[TogglerBox[Dynamic[Typeset`open], {True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "IconizeCloser"]], False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "IconizeOpener"]]}, BaselinePosition -> Baseline, Appearance -> None, ContentPadding -> False, FrameMargins -> 0], Alignment -> Left, FrameMargins -> {{1, 1}, {0, 0}}, BaselinePosition -> Baseline], Frame -> {{Directive[Opacity[0.5], RGBColor[0.831298829690661, 0.847045900003161, 0.850952150003161]], False}, {False, False}}]}}, GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0}}, "Rows" -> {{0}}}, BaselinePosition -> {1, 1}], True -> GridBox[{{GridBox[{{PaneBox[GridBox[{{AdjustmentBox[StyleBox[StyleBox[StyleBox["\"[\[FilledSmallSquare]]\"", FontColor -> RGBColor[0.8745098039215686, 0.2784313725490196, 0.03137254901960784]], "ResourceFunctionIcon"], FontFamily -> "Source Sans Pro Black", FontWeight -> "Heavy", PrivateFontOptions -> {"OperatorSubstitution" -> False}, FontSize -> 0.6538461538461539*Inherited, ShowStringCharacters -> False], BoxBaselineShift -> -0.25, BoxMargins -> {{0, 0}, {-1, -1}}], StyleBox[RowBox[{StyleBox["ObliviousRingMachine", "ResourceFunctionLabel"], " "}], FontColor -> GrayLevel[0.09999084492227013], FontSize -> (12*Inherited)/13, ShowStringCharacters -> False, ShowAutoStyles -> False]}}, GridBoxSpacings -> {"Columns" -> {{0.25}}}], Alignment -> Left, FrameMargins -> {{3, 0}, {0, 0}}, BaselinePosition -> Baseline, BaseStyle -> {LineSpacing -> {0, 0}, LineBreakWithin -> False}], ItemBox[PaneBox[TogglerBox[Dynamic[Typeset`open], {True -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "IconizeCloser"]], False -> DynamicBox[FEPrivate`FrontEndResource["FEBitmaps", "IconizeOpener"]]}, BaselinePosition -> Baseline, Appearance -> None, ContentPadding -> False, FrameMargins -> 0], Alignment -> Left, FrameMargins -> {{1, 1}, {0, 0}}, BaselinePosition -> Baseline], Frame -> {{Directive[Opacity[0.5], RGBColor[0.831298829690661, 0.847045900003161, 0.850952150003161]], False}, {False, False}}]}}, GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0}}, "Rows" -> {{0}}}, BaselinePosition -> {1, 1}]}, {StyleBox[PaneBox[GridBox[{{RowBox[{TagBox["\"Version (latest): \"", "IconizedLabel"], " ", TagBox["\"1.0.0\"", "IconizedItem"]}]}, {TagBox[TemplateBox[{"\"Documentation \[RightGuillemet]\"", "https://resources.wolframcloud.com/FunctionRepository/resources/4d4f4156-ff9f-4c07-a08a-224d075e56ae/"}, "HyperlinkURL"], "IconizedItem"]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> "Column", GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], Alignment -> Left, FrameMargins -> {{5, 4}, {0, 4}}, BaselinePosition -> Baseline], "DialogStyle", FontFamily -> "Roboto", FontSize -> 11]}}, GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, BaselinePosition -> {1, 1}, GridBoxDividers -> {"Columns" -> {{None}}, "Rows" -> {False, {GrayLevel[0.8]}, False}}]}, Dynamic[Typeset`open], BaselinePosition -> Baseline, ImageSize -> Automatic], BaselinePosition -> Baseline, FrameMargins -> {{0, 0}, {1, 0}}, FrameStyle -> RGBColor[0.831298829690661, 0.847045900003161, 0.850952150003161], Background -> RGBColor[0.968505860940661, 0.976440431253161, 0.984252931253161], RoundingRadius -> 4, DefaultBaseStyle -> {LightDarkAutoColorRules -> <|"MarkedColors" -> True|>}]], #1 & , TagBoxNote -> " "], {"FunctionResourceBox", RGBColor[0.8745098039215686, 0.2784313725490196, 0.03137254901960784], "ObliviousRingMachine"}, TagBoxNote -> "FunctionResourceBox"], ResourceFunction["ObliviousRingMachine"], Selectable -> False], "[", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"x_", ",", "y_"}], "}"}], "\[RuleDelayed]", RowBox[{"{", RowBox[{"y", ",", "x"}], "}"}]}], "}"}], ",", "2"}], "}"}], ",", RowBox[{"{", RowBox[{"Reverse", ",", RowBox[{"{", "}"}], ",", "3"}], "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], ",", "3", ",", "\"Rules\""}], "]"}]], "Output",
  CellLabel->"Out[1]=",
  CellID->648217690, ExpressionUUID->"bf9e8ebf-9f28-7e48-a729-1ea042b1de70"]
 }, Open  ]],

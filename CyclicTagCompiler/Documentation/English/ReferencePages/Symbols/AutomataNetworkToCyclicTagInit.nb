@@ -97,7 +97,7 @@ AutomataNetworkToObliviousRingMachineInit"]], "InlineFormula", ExpressionUUID->
 }], "Notes",
  CellID->554886555, ExpressionUUID->"816994dc-80e5-0343-8c75-ebda0c7a58ee"],
 
-Cell["The following option can be given:", "Notes",
+Cell["The following options can be given:", "Notes",
  CellID->224146467, ExpressionUUID->"1a4a96a6-1a8c-7645-8b87-2b54e23579f1"],
 
 Cell[BoxData[GridBox[{
@@ -107,7 +107,11 @@ Cell[BoxData[GridBox[{
      BaseStyle->"Link",
      ButtonData->"paclet:ref/Automatic"], Cell[
     "the kind of cyclic tag system to compile to", "TableText", 
-     ExpressionUUID->"069893e4-5e94-2f4f-b510-fe8b65e8ca85"]}
+     ExpressionUUID->"069893e4-5e94-2f4f-b510-fe8b65e8ca85"]},
+   {Cell["      ", "ModInfo", ExpressionUUID->
+     "5700c119-27e6-474f-8f5c-a3b9189877a7"], "\"\<Optimization\>\"", "\"\<DeletedSymbolsHighest\>\"", Cell[
+    "which optimization of the encoding to use", "TableText", 
+     ExpressionUUID->"acdc7015-5bae-4712-abb3-f1f4666504de"]}
   }]], "3ColumnTableMod",
  CellID->127789472, ExpressionUUID->"0a1cf29b-8718-b640-b62e-e7e97f54c252"],
 
@@ -118,7 +122,46 @@ Cell[TextData[{
   "44398e35-4e94-3545-8b2d-e656d9bb7735"],
  " and option settings as for the rule, step count and decoding."
 }], "Notes",
- CellID->50335016, ExpressionUUID->"24c65cd0-8e35-2041-a2cf-701ae4af527d"]
+ CellID->50335016, ExpressionUUID->"24c65cd0-8e35-2041-a2cf-701ae4af527d"],
+Cell[TextData[{
+ "With ",
+ Cell[BoxData[
+  RowBox[{"\"\<Optimization\>\"", 
+   RowBox[{" ", 
+    RowBox[{"->", " "}]}], "\"\<DeletedSymbolsHighest\>\""}]], "InlineFormula", 
+  ExpressionUUID->"696ee036-77c3-4254-a90c-f7a34681127f"],
+ ", the default, the symbol columns that every ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"4191bbc9-c699-4f44-a88e-ab64b929b0a6"],
+ "-ary rule part leaves empty are left out of the encoding. Nothing in the \
+compiled cyclic tag system ever appends for those symbols, so leaving them \
+out makes every block narrower and every step cheaper."
+}], "Notes",
+ CellID->707100217, ExpressionUUID->"b0c07497-7008-453c-9dca-1a3df846ff71"],
+
+Cell[TextData[{
+ "The compilation is then faithful up to a relabeling of the symbols: each \
+symbol that survives is renamed to its position among the survivors, and \
+every symbol that is left out decodes to one label that no surviving symbol \
+uses. The decoded evolution therefore behaves like the ",
+ Cell[BoxData[
+  StyleBox["n", "TI"]], "InlineFormula", ExpressionUUID->"ba2f411d-d146-49fe-b17c-66410a9851b1"],
+ "-ary one with its symbols renumbered, and is identical to it when there is \
+nothing to leave out."
+}], "Notes",
+ CellID->707100224, ExpressionUUID->"c842aad8-f4a9-4618-8780-97d1f8978900"],
+
+Cell[TextData[{
+ "No other setting is implemented yet. ",
+ Cell[BoxData[
+  ButtonBox["AutomataNetworkToCyclicTagInit",
+   BaseStyle->"Link",
+   ButtonData->"paclet:EricJamesParfitt/CyclicTagCompiler/ref/AutomataNetworkToCyclicTagInit"]], 
+  "InlineFormula", ExpressionUUID->"2e0e7f06-75c0-42b7-ab78-2f73cc17c386"],
+ " stays unevaluated when it is given any other value, rather than quietly \
+compiling something else."
+}], "Notes",
+ CellID->707100231, ExpressionUUID->"f84f2ae3-0867-4d4e-a6fc-10e42cd018d3"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -392,13 +435,7 @@ Cell[BoxData[
  CellLabel->"In[2]:=",
  CellID->824928639, ExpressionUUID->"8e5e58fe-9087-4041-b723-1ae936e72ef5"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-  "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",",
-    "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0",
-    ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",",
-    "0"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[2]=",
  CellID->594238096, ExpressionUUID->"8aa252fe-d3df-ba4e-88da-d0ecddf0f977"]
 }, Open  ]],
@@ -510,15 +547,7 @@ Cell[BoxData[
  CellLabel->"In[2]:=",
  CellID->885947586, ExpressionUUID->"6135f666-c74e-0745-ad16-a3a1f7f8a323"],
 
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-  "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",",
-    "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0",
-    ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",",
-    "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "1",
-    ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",",
-    "0", ",", "0"}], "}"}]], "Output",
+Cell[BoxData[RowBox[{"{", RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}]], "Output",
  CellLabel->"Out[2]=",
  CellID->124780856, ExpressionUUID->"55ce3984-a60a-f74b-85fb-2c062dac7161"]
 }, Open  ]],
