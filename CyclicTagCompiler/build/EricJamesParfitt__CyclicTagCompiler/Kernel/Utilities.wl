@@ -21,7 +21,7 @@ Begin["`Private`"];
 
 targetSystemStates[states_Integer, targetSystem_] :=
 	Switch[targetSystem,
-		"Rule110" | "rule110", Ceiling[states, 6],
+		"Rule110", Ceiling[states, 6],
 		Automatic, states]
 
 

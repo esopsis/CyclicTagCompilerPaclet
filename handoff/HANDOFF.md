@@ -7,12 +7,12 @@ landed and what is left.
 **Short version:** both optimizations are finished, verified, documented and tested, and
 they are now merged together on `Optimizations`. The whole test suite passes (191 / 191)
 and every stored example in the documentation notebooks matches what the current code
-produces. The version bump and the rebuild are deliberately **not** done yet.
+produces. The paclet has been bumped to **3.0.0** and rebuilt. What is left is merging to
+`main` and updating the Community article.
 
 ## 1. What this repo is
 
-A Wolfram Language paclet (`EricJamesParfitt/CyclicTagCompiler`, still v2.1.0 — see
-section 8) that compiles
+A Wolfram Language paclet (`EricJamesParfitt/CyclicTagCompiler`, v3.0.0) that compiles
 several computational systems down to **ordinary (binary) cyclic tag systems**:
 
 ```
@@ -315,25 +315,32 @@ things to expect:
   `Kernel/Utilities.wl`. It flips back on the next Windows build, so it is noise in the
   diff rather than a real change.
 
-This has been run once, as a dry run against a 3.0.0 `PacletInfo.wl`: the build succeeded,
-and the resulting archive reported v3.0.0 and passed all 191 tests when unpacked on its
-own in a kernel where the working tree was not registered. Both the version bump and the
-build were then backed out, so `build/` still holds the 1.0.0 and 2.1.0 archives and an
-unpacked tree built from the pre-optimization code.
+**The 3.0.0 build has been done and committed.** It took 67 s, built all 35 documentation
+notebooks with 0 failures, and produced
+`build/EricJamesParfitt__CyclicTagCompiler-3.0.0.paclet`, which now sits alongside the
+1.0.0 and 2.1.0 archives. The front end did *not* segfault this time, so treat that as
+intermittent rather than guaranteed.
 
-Note that the committed tree is stale in more ways than the version: its
-`Kernel/Utilities.wl` still has the lowercase `"rule110"` branch, because the last build
-predated the WIP commit that removed it. A rebuild will clear that up along with
-everything else.
+Verified by unpacking the archive and loading **only** that directory, in a kernel where
+the working tree was never registered: it reports v3.0.0, all 13 `Kernel/*.wl` files are
+byte-identical to the working tree, `ormStatesCheck`, `skips` and the stray `//Echo` are
+all absent, `getStates` is the merged `Max[Length /@ rule, 0]`, and it passes 191 / 191.
+The rebuild also cleared the stale lowercase `"rule110"` branch that the previously
+committed tree still carried in `Kernel/Utilities.wl`.
+
+Checking provenance this way is worth the trouble — `PacletObject[…]["Location"]` is not
+evidence (see trap 1 in section 6). Note that `Definition @@ {sym}` is a poor emptiness
+test: for an undefined symbol its string form is not `"Null"`, so a check like
+`ToString[Definition @@ {sym}] === "Null"` reports a false negative. Grep the archive's
+source instead.
 
 ## 8. What is left
 
-1. **Bump the version and rebuild** — a major bump, per section 3 — and commit the
-   resulting archive alongside the 1.0.0 and 2.1.0 ones. Both optimizations have landed,
-   so there is nothing further to wait for.
-2. **Merge to `main`.** This work lives on `Optimizations`; `main` is still at
+1. **Merge to `main`.** This work lives on `Optimizations`; `main` is still at
    `5e12cd9 Rebuild the paclet at version 2.1.0`. The symbol-reuse branch
    (`ORMToNCTNoXsWIP`) has already been merged into `Optimizations`.
+2. **Push.** Nothing here has been pushed; `origin/Optimizations` is still at the older
+   `7da39bc`.
 3. **Update the Community article** to describe both optimizations, the relabeling
    contract and the new n-ary signatures. Eric is doing this himself.
 

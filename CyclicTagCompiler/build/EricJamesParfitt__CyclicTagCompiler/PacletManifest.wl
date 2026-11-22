@@ -6,7 +6,7 @@
             "File"
             ->
             File[
-                "Kernel\\AutomataNetworkToCyclicTag.wl"
+                "Kernel/AutomataNetworkToCyclicTag.wl"
             ]
             ,
             "Hash"
@@ -19,12 +19,12 @@
             "File"
             ->
             File[
-                "Kernel\\AutomataNetworkToObliviousRingMachine.wl"
+                "Kernel/AutomataNetworkToObliviousRingMachine.wl"
             ]
             ,
             "Hash"
             ->
-            "d1ec170585b7a2c18b1d2467b863fb90279e9591e48a19a9c359670235bed698"
+            "a8d5269d9624ec14d7ac6da6c415335615fa691daea9f68239343793c63319c1"
                 
         |>
         ,
@@ -32,12 +32,12 @@
             "File"
             ->
             File[
-                "Kernel\\CellularAutomatonToCyclicTag.wl"
+                "Kernel/CellularAutomatonToCyclicTag.wl"
             ]
             ,
             "Hash"
             ->
-            "ea2048f028e8475c5121f75ce7b07d98144c6000fb9a02358395bac501cddbc3"
+            "883bf3e1f9c7c2f230df76cb52e058efeaa89825604408070326539ff081f791"
                 
         |>
         ,
@@ -45,12 +45,12 @@
             "File"
             ->
             File[
-                "Kernel\\CellularAutomatonToObliviousRingMachine.wl"
+                "Kernel/CellularAutomatonToObliviousRingMachine.wl"
             ]
             ,
             "Hash"
             ->
-            "90676399b7e1f6c90e40f81678dd7fd5b87d250a360e84c0f9b4e109f7aedf57"
+            "80e7ff757da3e36b4adb7d4ac7e88b95591ba8ed31be189de3420c99d90f4aa1"
                 
         |>
         ,
@@ -58,12 +58,12 @@
             "File"
             ->
             File[
-                "Kernel\\CyclicTagCompiler.wl"
+                "Kernel/CyclicTagCompiler.wl"
             ]
             ,
             "Hash"
             ->
-            "d985e9d97a5951407e214fd49685addb9e6c8f1d51b4f1567002d079e7cccb47"
+            "fe794569ce07f7e80a17a881e3364a01e4eecf58ec42c4e6acfbf45316362c99"
                 
         |>
         ,
@@ -71,12 +71,12 @@
             "File"
             ->
             File[
-                "Kernel\\CyclicTagSystem.wl"
+                "Kernel/CyclicTagSystem.wl"
             ]
             ,
             "Hash"
             ->
-            "87cf70a60cd3c476abf9a31c60331097ef34564e24282bcb11fdbb9acf87c248"
+            "0688caf8f1dbd4363a9b496816861204f5f7fc880771bc929034140e36c9f38d"
                 
         |>
         ,
@@ -84,12 +84,12 @@
             "File"
             ->
             File[
-                "Kernel\\NaryCyclicTagToCyclicTag.wl"
+                "Kernel/NaryCyclicTagToCyclicTag.wl"
             ]
             ,
             "Hash"
             ->
-            "695246f9faf47f5dff6206ccbe559f6043420093fdadae4ff080b873c77b6bd0"
+            "b9af3a481a00d7620ca6beb06c0913ced28cfe8d2ce4061181c32d4d0a965614"
                 
         |>
         ,
@@ -97,12 +97,12 @@
             "File"
             ->
             File[
-                "Kernel\\ObliviousRingMachineRules.wl"
+                "Kernel/ObliviousRingMachineRules.wl"
             ]
             ,
             "Hash"
             ->
-            "03f69b0b682450f3fec2b31256babdb64b6671ece48cc6a3bc9fd99ca0f8aace"
+            "2fcadba644ac2bf2c58ec3c31df3ac953f88aa19c40f7ea15facd9ebe6db6dd1"
                 
         |>
         ,
@@ -110,12 +110,12 @@
             "File"
             ->
             File[
-                "Kernel\\ObliviousRingMachineToCyclicTag.wl"
+                "Kernel/ObliviousRingMachineToCyclicTag.wl"
             ]
             ,
             "Hash"
             ->
-            "ce1977aa8c152a21cc874c649fcf506c2a0cc00b9454a611158eceea0c97fa6c"
+            "125088768e75a73c4ad726df5d82658a23ebd3e23b197922d948b0da82b3850b"
                 
         |>
         ,
@@ -123,12 +123,12 @@
             "File"
             ->
             File[
-                "Kernel\\ObliviousRingMachineToNaryCyclicTag.wl"
+                "Kernel/ObliviousRingMachineToNaryCyclicTag.wl"
             ]
             ,
             "Hash"
             ->
-            "398aaf73174e671b394ccdb19987ba71f0055f6ec2212cedfa90c92d4a61dc2b"
+            "28edd6d6e6605b2e7a0c4be6454a67a4a0aa6a3a750478b0f8f88d59a2a6c4e9"
                 
         |>
         ,
@@ -136,7 +136,7 @@
             "File"
             ->
             File[
-                "Kernel\\ResourceFunctions.wl"
+                "Kernel/ResourceFunctions.wl"
             ]
             ,
             "Hash"
@@ -149,12 +149,12 @@
             "File"
             ->
             File[
-                "Kernel\\Systems.wl"
+                "Kernel/Systems.wl"
             ]
             ,
             "Hash"
             ->
-            "934f015d6bae8212b15ed7fbbd39563691e196846b41ef0fe3ca6463eef541b6"
+            "b3846e85255d379ce9877db3bae4f3a8a8fa5ebcaa58aab95829932aee13d30e"
                 
         |>
         ,
@@ -162,12 +162,12 @@
             "File"
             ->
             File[
-                "Kernel\\Utilities.wl"
+                "Kernel/Utilities.wl"
             ]
             ,
             "Hash"
             ->
-            "7c3d9e92d59128cdff03be1e044f8231d3aad4f88729397c16fe4263d8c8dac7"
+            "001360ae9bc678c564193f54bbb02415cc271695dbf8c337fd306e2e11114aa1"
                 
         |>
         ,
@@ -175,13 +175,26 @@
             "File"
             ->
             File[
-                "Documentation\\English\\Guides\\CyclicTagCompiler.nb"
+                "Documentation/English/Guides/CyclicTagCompiler.nb"
+            ]
+            ,
+            "Hash"
+            ->
+            "9382e67596892eb5c23696aaad62ccf05ed1e3f3e38866cdff3a0c5e66cc0e8a"
+                
+        |>
+        ,
+        <|
+            "File"
+            ->
+            File[
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkRun.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "580cfaea892b473afde533310d2e8268da8c2944a4f824f4fd0e9c6b958b0ec0"
+            "b08907d6f90dac32f16bf9114c63b79b66946568bb05498e9f319220c927cab7"
                 
         |>
         ,
@@ -189,13 +202,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkRun.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToCyclicTagInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "2635c893b525b88deba331a145585e34b051418d7a5db504d8559ff0da513db4"
+            "64eff34ee430034a0abf79f4f4a35e1b1e718c86e63800da2e9c27334e148c8a"
                 
         |>
         ,
@@ -203,13 +216,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToCyclicTagInit.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToCyclicTagRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "c203202d6c52a47694a4e56499d74ae48c2addef3b3b21f9b754263015ccaa55"
+            "f002ac0013af4fcba598ee193d1ca6730d2a6dd9d0b93e4c90070b82888ce907"
                 
         |>
         ,
@@ -217,13 +230,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToCyclicTagRule.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToCyclicTagSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "97c81829f73d80d296e6ae902c84a9053beef3b46b62d3fca9b865608eac2de1"
+            "6421bab8405d5c2a2e107b2e4da6c80b1058816f9fd141e7a0ccc617abbb50b9"
                 
         |>
         ,
@@ -231,13 +244,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToCyclicTagSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToObliviousRingMachineInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "e4181806dc05bf530d9f46a43666aace00c7a38e97e0c90535df007208911350"
+            "71de714670da3040516c557a7c4c4b17b3cf180edc3a36ca524ecae02dc9e8bc"
                 
         |>
         ,
@@ -245,13 +258,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToObliviousRingMachineInit.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToObliviousRingMachineRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "3226f7921ebd3616812026e25f1221a869d3a35ebdf1da27ee2ec9666956c61b"
+            "c753505ec5da546c238e92b1c3e0bd50dcf1d1dfa09ed3d6de1702ecbfe2bb66"
                 
         |>
         ,
@@ -259,13 +272,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToObliviousRingMachineRule.nb"
+                "Documentation/English/ReferencePages/Symbols/AutomataNetworkToObliviousRingMachineSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "e64a1bdd8d16f421ebca320ea39e179f4d4d78f62254407b78dba177ced95d92"
+            "a23ab1cffd6f4fd0b76e08e4e49652bea9a9e2163e922ec7c78d4d823c431ae5"
                 
         |>
         ,
@@ -273,13 +286,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\AutomataNetworkToObliviousRingMachineSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToCyclicTagInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "d5a88ccf3aa509cb94df8c2877847b102f248df4c97c76379d2353ea268af122"
+            "aba038c31de9eec19f60ef2c8b1f8ffa76604eb567f58f98309b691583601407"
                 
         |>
         ,
@@ -287,13 +300,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToCyclicTagInit.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToCyclicTagRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "68706ee29eab7b56a50ff93b319ccb9fb9e9f24bd966aa2e25039f60a59e11df"
+            "4e53a86a9149901be84f83c8c7ce9766882da95e358ff7b74f3ffcf7411b441d"
                 
         |>
         ,
@@ -301,13 +314,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToCyclicTagRule.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToCyclicTagSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "67cc0819418311c39505d3c779755baf2759ddbb05e4cc0d87f3f9991f660513"
+            "0ba7732e3eea4993e19fcf10af875e94e3433a22670a9505c88960a320f1ce57"
                 
         |>
         ,
@@ -315,13 +328,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToCyclicTagSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToObliviousRingMachineInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "b4ac553994a0c41c92d7db4157e7551ac92d5afd5ba9d19b5ebdad8882f904e0"
+            "44d0b06568bba9a536fe4a0865101647cfd93a204ab9ad6f4a694ff7e9a90c15"
                 
         |>
         ,
@@ -329,13 +342,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToObliviousRingMachineInit.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToObliviousRingMachineRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "39f2b8a42bdb5ab84831228b661433e86b7a75265c40099b8d79bda199c175cc"
+            "e8f35cc45bf83306cd0d6575fc2635abfd533d0ca10e08113889bf54effa2d20"
                 
         |>
         ,
@@ -343,13 +356,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToObliviousRingMachineRule.nb"
+                "Documentation/English/ReferencePages/Symbols/CellularAutomatonToObliviousRingMachineSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "f7a050b8b10af34b01a3d168df9bcfc935a71eed71369421e53c55711e0dd21e"
+            "4b6127618ff537391b8fdc1981764dd1f58494fd48951f29aab6d8a27ad02df2"
                 
         |>
         ,
@@ -357,13 +370,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CellularAutomatonToObliviousRingMachineSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/CompiledAutomataNetworkToCyclicTag.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "51fb0313ee8d239e8ec1fc0d4ac7b5fb7262d55f462eb1b2070d0dd4abd61e0f"
+            "716ce0174fb45f89de0d480b5f25008332ba979f284b3f7a3f832acb3a31131e"
                 
         |>
         ,
@@ -371,13 +384,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CompiledAutomataNetworkToCyclicTag.nb"
+                "Documentation/English/ReferencePages/Symbols/CompiledCellularAutomatonToCyclicTag.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "e2a3ef1decccfc14ae422b522cda5d995a1c5ad54bc33916d2349d8b47bbf1bd"
+            "2432a2aba348ed4bff7b0f5204d50ed6f62aa2ea44a51f56a03bf3a80f9de47f"
                 
         |>
         ,
@@ -385,13 +398,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CompiledCellularAutomatonToCyclicTag.nb"
+                "Documentation/English/ReferencePages/Symbols/CyclicTagSystem.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "7edda31af051068afbce672d8cfcac72962eb7927523a5ad95f896a3d6fc5674"
+            "5cc61ce17588d2553acc31bb5e18f9fdbf94c8ffec4e48b771bba83c2b10a08f"
                 
         |>
         ,
@@ -399,13 +412,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\CyclicTagSystem.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeCyclicTagToAutomataNetwork.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "f3288436ea442198f2b7eb1af1eea6e3bc6a9eaae7ff516a817264bf6d465cc5"
+            "f0bdef44ae44896bbf0aee54bcc3058210ee738edd88b83ac045ff2ac354f271"
                 
         |>
         ,
@@ -413,13 +426,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeCyclicTagToAutomataNetwork.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeCyclicTagToCellularAutomaton.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "53e523097cd91064c0c4a4354740e7ec22da89a7f625037c525e825288681601"
+            "e38a0ef2d1a75039fa0b8c119b313e41472bc82c4f846e233cacf45c77904721"
                 
         |>
         ,
@@ -427,13 +440,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeCyclicTagToCellularAutomaton.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeCyclicTagToNaryCyclicTag.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "6c9de529b6644cf8803907d192f6c954edd7b46f3eb962f87a2e6e60d0658fdb"
+            "154907a0204cb24d7f5ef060b64df2ab4d326effa34ba0e7bd1c1bc0f09a54ec"
                 
         |>
         ,
@@ -441,13 +454,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeCyclicTagToNaryCyclicTag.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeCyclicTagToObliviousRingMachine.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "87e436df9a2bab278ac25100f0504284310018ae2f2d4f346b95fac4d43a99b1"
+            "94dcb8c400f902c1c9ddc54e95acf169f8c2c7b803c5665beba240e4257d8bab"
                 
         |>
         ,
@@ -455,13 +468,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeCyclicTagToObliviousRingMachine.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeNaryCyclicTagToObliviousRingMachine.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "88e19714521a1593f94efa6c859aa1de561eccf1dc2665e31d17c9b1d2c80961"
+            "034d683bb7d0771a38e28faeb2a8ba8e776459f87d28ab69c55a44ad08871859"
                 
         |>
         ,
@@ -469,13 +482,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeNaryCyclicTagToObliviousRingMachine.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeObliviousRingMachineToAutomataNetwork.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "cc4a170a51f8c3ed15ed1b7da27cf403352df007601dd0b2a9106acccd11e48e"
+            "27c85b87f8d8e854e6f38f4a27e2838c29b25c37bf76f610a99a80d39e87852c"
                 
         |>
         ,
@@ -483,13 +496,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeObliviousRingMachineToAutomataNetwork.nb"
+                "Documentation/English/ReferencePages/Symbols/DecodeObliviousRingMachineToCellularAutomaton.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "e6c418548442269e38ca91edbeca0140fa53bff2359fa96781f9554373c44852"
+            "4fff5dfe0c60ad10136df5154932b92786060eaaafec04d75b62ad27f9a23be4"
                 
         |>
         ,
@@ -497,13 +510,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\DecodeObliviousRingMachineToCellularAutomaton.nb"
+                "Documentation/English/ReferencePages/Symbols/NaryCyclicTag.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "13898dac660c9bacc06ea27726d84a7ea254f26236f86f22ec98b77c0cd4ea6b"
+            "7ccbc85b07292be066ca480caac3e91e4f17822489f7c9c4cfdb88063e7c4a96"
                 
         |>
         ,
@@ -511,13 +524,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\NaryCyclicTag.nb"
+                "Documentation/English/ReferencePages/Symbols/NaryCyclicTagToCyclicTagInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "4cee2bde50b3900a7ffe861a60ae147a549f0b6921d4461d2bbd1d26e4f7dd8f"
+            "d6609649d7fecadcb053b648dbe95c375535e4266f82392a345debe24d127d61"
                 
         |>
         ,
@@ -525,13 +538,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\NaryCyclicTagToCyclicTagInit.nb"
+                "Documentation/English/ReferencePages/Symbols/NaryCyclicTagToCyclicTagRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "b008edfd1e3299b2ca9db7447e24cee965037ccd87ce9e97aa54d5193dac05ad"
+            "0aad82a46c0c9b6de7b29197d7edce14d29717941497fbc1bb023d064eab4f8b"
                 
         |>
         ,
@@ -539,13 +552,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\NaryCyclicTagToCyclicTagRule.nb"
+                "Documentation/English/ReferencePages/Symbols/NaryCyclicTagToCyclicTagSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "de46cf975244f938612bd068d20a3fa9f2415f8306b18ed7bb2667f351a163ef"
+            "0850abb9cd365fd8f63e987a2704199eac7779b4773c558c73bf0ad4eac91628"
                 
         |>
         ,
@@ -553,13 +566,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\NaryCyclicTagToCyclicTagSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachine.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "0cf467efe63a75de65efa894627797c01879b492ca335e7921d7e36930d75c45"
+            "7b70891f90882bfcabbe005e24c94ce1318b322d65c164e5ad7877c9617308c2"
                 
         |>
         ,
@@ -567,13 +580,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachine.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachineToCyclicTagInit.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "042524e98fa9a9f5526a1714c049bfb6b70b5c84aeba0bb4f49ceeda61917642"
+            "6a46f51fdae25c1cd198a82a1a4f2bb2123725dd5e9786b7d4081b84326cca91"
                 
         |>
         ,
@@ -581,13 +594,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachineToCyclicTagInit.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachineToCyclicTagRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "61cfa1b00c6832693a8fa0ff129c98537e17c615f99845ec8aad583cee2839ae"
+            "6fef811304a260203aa09e4236cf1c38e7ddfddd1a1cfbcd3d4be41f37084b88"
                 
         |>
         ,
@@ -595,13 +608,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachineToCyclicTagRule.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachineToCyclicTagSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "edbc95386d90873d56f4607e11e25d8fc220b7a575de3e020124882f36793e13"
+            "36c759fab2b1de694698f2d42f3c4d42e33d8d97c66f89cfd02b73d08baf62a9"
                 
         |>
         ,
@@ -609,13 +622,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachineToCyclicTagSteps.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachineToNaryCyclicTagRule.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "08f57b3e19d78c8ea44499ba7b1548c2279c192c1406eca8d56c2454349581d4"
+            "df225554895c1a87575d811df93d0c6b304c623f81e26ffd00ae44292dfb1e2a"
                 
         |>
         ,
@@ -623,13 +636,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachineToNaryCyclicTagRule.nb"
+                "Documentation/English/ReferencePages/Symbols/ObliviousRingMachineToNaryCyclicTagSteps.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "2c8cdee7aad42f32bf83c95c02b29d07a68364f096ad7e7b3dde99cb5e4675a2"
+            "42d4266ee61afc9236aa92037fbf1069fc1d52fe54275190e89a29932d998013"
                 
         |>
         ,
@@ -637,13 +650,13 @@
             "File"
             ->
             File[
-                "Documentation\\English\\ReferencePages\\Symbols\\ObliviousRingMachineToNaryCyclicTagSteps.nb"
+                "Documentation/English/Tutorials/CompilingToCyclicTagSystems.nb"
                     
             ]
             ,
             "Hash"
             ->
-            "69c37d6f0c4adc10b98030eeffc77b960740277a69036f8f18deecaf44ca3989"
+            "7daecb14685df71f79f529f4814aa563485f76630a4bdffd73c5b6c4f96ff372"
                 
         |>
         ,
@@ -651,21 +664,7 @@
             "File"
             ->
             File[
-                "Documentation\\English\\Tutorials\\CompilingToCyclicTagSystems.nb"
-                    
-            ]
-            ,
-            "Hash"
-            ->
-            "a8e589b74390c86694ac37432f87fc94467c0bfeedfa080baedaaa0e6aec0e1e"
-                
-        |>
-        ,
-        <|
-            "File"
-            ->
-            File[
-                "Tests\\AutomataNetwork.wlt"
+                "Tests/AutomataNetwork.wlt"
             ]
             ,
             "Hash"
@@ -678,7 +677,7 @@
             "File"
             ->
             File[
-                "Tests\\CellularAutomaton.wlt"
+                "Tests/CellularAutomaton.wlt"
             ]
             ,
             "Hash"
@@ -691,12 +690,12 @@
             "File"
             ->
             File[
-                "Tests\\CyclicTagSystem.wlt"
+                "Tests/CyclicTagSystem.wlt"
             ]
             ,
             "Hash"
             ->
-            "0c97eed31357aab68fd8647ddb9f49ffa593e35c024a9b5bd6ae840920b3cb6e"
+            "48c1387635cbceebee4a10489cd0b5d0473e8a6417906a77ddcfad2b59cef2b0"
                 
         |>
         ,
@@ -704,7 +703,7 @@
             "File"
             ->
             File[
-                "Tests\\Loading.wlt"
+                "Tests/Loading.wlt"
             ]
             ,
             "Hash"
@@ -717,12 +716,12 @@
             "File"
             ->
             File[
-                "Tests\\NaryCyclicTag.wlt"
+                "Tests/NaryCyclicTag.wlt"
             ]
             ,
             "Hash"
             ->
-            "25b7b83a52afd0e75ac0176efff4567aa942dffc955b1cd329c10b42d8c3de7f"
+            "de7126dbd3a4eac65589a66352d486295483378e807e1e64a73c1471fcac98e2"
                 
         |>
         ,
@@ -730,7 +729,7 @@
             "File"
             ->
             File[
-                "Tests\\ObliviousRingMachine.wlt"
+                "Tests/ObliviousRingMachine.wlt"
             ]
             ,
             "Hash"
@@ -743,12 +742,12 @@
             "File"
             ->
             File[
-                "Tests\\Regression.wlt"
+                "Tests/Regression.wlt"
             ]
             ,
             "Hash"
             ->
-            "d44156401537d8f5aa28235ab16bb0d8bcacc22476dfd0a12b78bc9ca92afc44"
+            "9922b172e8a7fbec823ef0c1b971fc561d994d001838449acafccdff12269843"
                 
         |>
         ,
@@ -756,7 +755,7 @@
             "File"
             ->
             File[
-                "Tests\\ResourceFunctions.wlt"
+                "Tests/ResourceFunctions.wlt"
             ]
             ,
             "Hash"

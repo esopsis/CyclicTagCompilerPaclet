@@ -8,7 +8,7 @@ PacletObject[
 		"License" -> "MIT",
 		"URL" -> "https://community.wolfram.com/t/a-simpler-polynomial-time-compilation-to-cyclic-tag-for-bounded-computation",
 		"PublisherID" -> "EricJamesParfitt",
-		"Version" -> "2.1.0",
+		"Version" -> "3.0.0",
 		"WolframVersion" -> "15.0+",
 		"PrimaryContext" -> "EricJamesParfitt`CyclicTagCompiler`",
 		"Keywords" -> {

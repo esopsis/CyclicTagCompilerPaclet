@@ -18,15 +18,10 @@ Options[ObliviousRingMachineToCyclicTagRule] = Options[NaryCyclicTagToCyclicTagR
 
 
 ObliviousRingMachineToCyclicTagRule[rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer : 2, opts : OptionsPattern[]] :=
-	NaryCyclicTagToCyclicTagRule[#, opts] &@
-		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates]
-
-
-(* The number of n-ary cyclic tag symbols: one more than the largest symbol in the compiled rule, and at least tapeStates. *)
-ormStatesCheck[rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer] :=
-	Max[
-		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates] + 1,
-		tapeStates]
+	NaryCyclicTagToCyclicTagRule[
+		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates], 
+		"Optimization" -> "DeletedSymbolsHighest", 
+		opts]
 
 
 Options[ObliviousRingMachineToCyclicTagInit] = Options[NaryCyclicTagToCyclicTagInit];
@@ -35,39 +30,34 @@ Options[ObliviousRingMachineToCyclicTagInit] = Options[NaryCyclicTagToCyclicTagI
 ObliviousRingMachineToCyclicTagInit[init_List, rule_?ormRuleQ, tapeStates_Integer : 2, opts : OptionsPattern[]] :=
 	NaryCyclicTagToCyclicTagInit[
 		init,
-		ormStatesCheck[rule, Length[init], tapeStates],
+		ObliviousRingMachineToNaryCyclicTagRule[rule, Length[init], tapeStates],
+		"Optimization" -> "DeletedSymbolsHighest",
 		opts]
 
 
 Options[ObliviousRingMachineToCyclicTagSteps] = Options[NaryCyclicTagToCyclicTagSteps];
 
 
-ObliviousRingMachineToCyclicTagSteps[
-		steps_Integer?NonNegative,
-		rule_?ormRuleQ,
-		tapeLength_Integer,
-		tapeStates_Integer : 2,
+ObliviousRingMachineToCyclicTagSteps[steps_Integer?NonNegative, rule_?ormRuleQ, tapeLength_Integer, tapeStates_Integer : 2,
 		opts : OptionsPattern[]] :=
 	NaryCyclicTagToCyclicTagSteps[
 		ObliviousRingMachineToNaryCyclicTagSteps[steps, rule, tapeLength, tapeStates],
-		ormStatesCheck[rule, tapeLength, tapeStates],
+		ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, tapeStates],
+		"Optimization" -> "DeletedSymbolsHighest",
 		opts]
 
 
 Options[DecodeCyclicTagToObliviousRingMachine] = Options[DecodeCyclicTagToNaryCyclicTag];
 
 
-DecodeCyclicTagToObliviousRingMachine[
-		history : {___List},
-		rule_?ormRuleQ,
-		tapeLength_Integer,
-		states_Integer : 2,
+DecodeCyclicTagToObliviousRingMachine[history : {___List}, rule_?ormRuleQ, tapeLength_Integer, states_Integer : 2,
 		opts : OptionsPattern[]] :=
 	DecodeNaryCyclicTagToObliviousRingMachine[
 		DecodeCyclicTagToNaryCyclicTag[
 			history,
-			ormStatesCheck[rule, tapeLength, states],
-			opts],
+			ObliviousRingMachineToNaryCyclicTagRule[rule, tapeLength, states],
+			opts,
+			"Optimization" -> "DeletedSymbolsHighest"],
 		rule,
 		states]
 

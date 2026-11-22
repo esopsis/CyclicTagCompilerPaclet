@@ -7,6 +7,8 @@
 (* ::Text:: *)
 (*Compile n-ary cyclic tag systems, oblivious ring machines, finite cellular automata and automata networks to ordinary cyclic tag systems, and decode cyclic tag evolutions back.*)
 (*The method was devised by Seth Marshall; this Wolfram Language implementation is by Eric James Parfitt.*)
+(*The construction is described in "A Simpler Polynomial-Time Compilation to Cyclic Tag for Bounded Computation":*)
+(*https://community.wolfram.com/t/a-simpler-polynomial-time-compilation-to-cyclic-tag-for-bounded-computation*)
 
 
 BeginPackage["EricJamesParfitt`CyclicTagCompiler`"];
@@ -38,17 +40,16 @@ AutomataNetworkRun[{{{rules1, s1}, inputs1, label1}, {{rules2, s2}, inputs2, lab
 
 
 NaryCyclicTagToCyclicTagRule::usage =
-"NaryCyclicTagToCyclicTagRule[rule] converts the n-ary cyclic tag rule rule to a cyclic tag rule.
-NaryCyclicTagToCyclicTagRule[rule, states] uses at least states tape symbols.";
+"NaryCyclicTagToCyclicTagRule[rule] converts the n-ary cyclic tag rule rule to a cyclic tag rule.";
 
 NaryCyclicTagToCyclicTagInit::usage =
-"NaryCyclicTagToCyclicTagInit[init, states] converts the n-ary cyclic tag tape init with states tape symbols to a cyclic tag tape.";
+"NaryCyclicTagToCyclicTagInit[init, rule] converts the n-ary cyclic tag tape init to a cyclic tag tape, in the encoding that NaryCyclicTagToCyclicTagRule[rule] compiles to.";
 
 NaryCyclicTagToCyclicTagSteps::usage =
-"NaryCyclicTagToCyclicTagSteps[steps, states] gives the number of cyclic tag steps that emulate steps steps of an n-ary cyclic tag system with states tape symbols.";
+"NaryCyclicTagToCyclicTagSteps[steps, rule] gives the number of cyclic tag steps that emulate steps steps of the n-ary cyclic tag system with the rule rule.";
 
 DecodeCyclicTagToNaryCyclicTag::usage =
-"DecodeCyclicTagToNaryCyclicTag[history, states] decodes the cyclic tag evolution history to the evolution of the n-ary cyclic tag system with states tape symbols that it emulates.";
+"DecodeCyclicTagToNaryCyclicTag[history, rule] decodes the cyclic tag evolution history to the evolution of the n-ary cyclic tag system that the compilation of rule emulates.";
 
 
 (* ::Section:: *)
