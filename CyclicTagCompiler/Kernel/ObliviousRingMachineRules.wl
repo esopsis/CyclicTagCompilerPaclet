@@ -105,7 +105,7 @@ ObliviousRingMachineToNaryCyclicTagRule::nni = "Negative offsets not currently i
 (* A step with no rules still reads (and rewrites unchanged) one symbol, then rotates. *)
 stepReplacementSize[{}] = 1;
 
-stepReplacementSize[rule_List] := Length[First[Keys[rule]]]
+stepReplacementSize[rule_List] := Length @ First @ Keys[rule]
 
 
 skipSelector[states_Integer] :=
@@ -114,7 +114,7 @@ skipSelector[states_Integer] :=
 
 skips[states_Integer, replacementSize_Integer, tapeLength_Integer, extraSkips_Integer:0] :=
 	Table[
-		Append[skipSelector[states], {}],
+		skipSelector[states],
 		tapeLength - replacementSize + extraSkips]
 
 
@@ -122,7 +122,7 @@ selectors[rule_?ruleQ, states_Integer] :=
 	With[{orderedRule =
 			Replace[rule] /@
 				Reverse /@
-					Tuples[Range[0, states - 1], stepReplacementSize[rule]]},
+					Tuples[Range[0, states - 1], stepReplacementSize[rule]]//Echo},
 		MapIndexed[
 			Append[
 				skipSelector[states],
@@ -132,20 +132,38 @@ selectors[rule_?ruleQ, states_Integer] :=
 			orderedRule]]
 
 
+mapIndexedReversed[f_,expr_]:=MapIndexed[f[#1,Length[expr]-#2+1]&,expr]
+
+
+padSelectors[unPaddeds_,padding_Integer,states_Integer]:=
+	ArrayPad[#,{padding,0},states]&/@unPaddeds
+
+
+selectors[rule_?ruleQ, states_Integer] :=
+	mapIndexedReversed[padSelectors[#1,First[#2]-1,states]&,
+		Partition[Replace[rule] /@
+				Tuples[Range[0, states-1], stepReplacementSize[rule]],states]]
+
+
 digitWeights[states_Integer, replacementSize_Integer] :=
 	Prepend[0]/@
 		Table[v * states^i,
-			{i, 0, replacementSize - 1},
-			{v, states-1}]
+			{i, replacementSize - 1 - 1, 0, -1},
+			{v, states - 1}]
 
 
 numberedPads[states_Integer, replacementSize_Integer] :=
-	Append[{}] /@ 
-		MapAt[
-			Map@Append[states],
-			digitWeights[states, replacementSize]/.
-				n_Integer:>Table[states + 1, n],
-			-1]
+	Append[
+		digitWeights[states, replacementSize]/.
+				n_Integer:>Table[states, n],
+			List/@Range[0,states-1]]
+
+
+numberedPads[rule_?ruleQ, states_Integer, replacementSize_Integer] :=
+	Append[
+		digitWeights[states, replacementSize]/.
+				n_Integer:>Table[states, n],
+			Table[Prepend[i][Table[states,Length@selectors[rule,states]]],{i,0,states-1}]]
 
 
 ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :=
@@ -155,7 +173,18 @@ ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :
 				numberedPads[states, replacementSize],
 				skips[states, replacementSize, tapeLength],
 				selectors[rule, states],
-				skips[states, replacementSize, tapeLength, offset]]] /;
+				skips[states, replacementSize, tapeLength, offset+3]]] /;
+	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
+
+
+ormToNCTStepI[{rule_List, offset_Integer}, tapeLength_Integer, states_Integer] :=
+	With[{replacementSize = stepReplacementSize[rule]},
+		Append[{}] /@
+			Join[
+				numberedPads[states, replacementSize],
+				Table[skipSelector[states],tapeLength - replacementSize],
+				selectors[rule, states],
+				Table[skipSelector[states],tapeLength + offset]]] /;
 	If[Negative[offset], Message[ObliviousRingMachineToNaryCyclicTagRule::nni]; False, True]
 
 
