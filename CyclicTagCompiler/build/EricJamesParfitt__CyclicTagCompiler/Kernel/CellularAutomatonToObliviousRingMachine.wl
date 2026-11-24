@@ -26,9 +26,12 @@ Begin["`Private`"];
 cAWindowRule[lhs : {_, rest___} -> rhs_] := lhs -> {rhs, rest}
 
 
+cAWindowRule[rule_,chunks_Integer]:=Replace[Transpose[List@@@Tuples[rule,chunks]],{lhss_,rhss_}:>Catenate[lhss]->Join[rhss,Catenate[lhss][[Length[rhss]+1;;]]]]
+
+
 (* The function step that copies the last cell of a window to its first. *)
-cAWrapStep[states_Integer, diameter_Integer] :=
-	{Replace[{_, x___, y_} :> {y, x, y}], states, diameter}
+cAWrapStep[states_Integer, diameter_Integer,chunks_Integer] :=
+	{Replace[{_, x___, y_} :> {y, x, y}], states, chunks * diameter}
 
 
 Options[CellularAutomatonToObliviousRingMachineRule] = {"InfiniteSteps" -> False};
@@ -42,13 +45,13 @@ CellularAutomatonToObliviousRingMachineRule[
 	With[{expandedRule = cellularAutomatonRuleExpand[rule]},
 		With[{
 				windowRule = cAWindowRule /@ expandedRule,
-				diameter = Length[First[Keys[expandedRule]]]},
+				diameter = Length@First@Keys[expandedRule]},
 			If[OptionValue["InfiniteSteps"],
 				Join[
 					Table[
-						cAWrapStep[maxStates[expandedRule, tapeStates], diameter], 
-						diameter - 1],
-					Table[windowRule, tapeLength]],
+						cAWrapStep[maxStates[expandedRule, tapeStates], diameter, chunks], 
+						chunks * diameter - 1],
+					Table[windowRule, tapeLength-(chunks-1)]],
 				{windowRule}]]]
 
 
@@ -93,7 +96,7 @@ DecodeObliviousRingMachineToCellularAutomaton[
 			ResourceFunction["ArraySkew"][sweeps[[All, diameter ;;]], Ceiling[r]],
 			MapIndexed[
 				#1[[;; -((diameter - 1) (First[#2] - 1) + 1)]] &,
-				sweeps[[1 ;; UpTo[Quotient[Length[First[history]] - 1, diameter - 1] + 1]]]]]]
+				sweeps[[1 ;; UpTo[Quotient[Length@First[history] - 1, diameter - 1] + 1]]]]]]
 
 
 End[];
